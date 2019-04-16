@@ -21,23 +21,16 @@ answerMassa = inputdlg(prompt,dlgtitle,dims,definput,opts);
 prompt = {'Entre com os valores da Matriz de Rigidez','k_{11}:','k_{12}:','k_{21}:','k_{22}:'};
 dlgtitle = 'Matriz de rigidez, PARTE 2/5';
 dims = [0 50;1 15;1 15;1 15;1 15];
-definput = {'','3','4','5','6'};
+definput = {'','4','-1','-1','2'};
 opts.Interpreter = 'tex';
 answerRigidez = inputdlg(prompt,dlgtitle,dims,definput,opts);
 
 prompt = {'Entre com os valores da Matriz de Amortecimento','c_{11}:','c_{12}:','c_{21}:','c_{22}:'};
 dlgtitle = 'Matriz de Amortecimento, PARTE 3/5';
 dims = [0 50;1 15;1 15;1 15;1 15];
-definput = {'','3','4','5','6'};
+definput = {'','5','-2','-2','3'};
 opts.Interpreter = 'tex';
 answerAmortecimento = inputdlg(prompt,dlgtitle,dims,definput,opts);
-
-prompt = {'Entre com os valores do Vetor de Forças','F_1:','F_2:' };
-dlgtitle = 'Forças Externas, PARTE 4/5';
-dims = [0 50;1 15;1 15];
-definput = {'','3','4','5','6'};
-opts.Interpreter = 'tex';
-answerForcas = inputdlg(prompt,dlgtitle,dims,definput,opts);
 
 % Matrizes características do problema
 
@@ -45,11 +38,8 @@ M = [str2double(answerMassa{2,1}) 0; 0 str2double(answerMassa{3,1})]
 
 K = [str2double(answerRigidez{2,1}) str2double(answerRigidez{3,1}); str2double(answerRigidez{4,1}) str2double(answerRigidez{5,1})]
 
-D = [str2double(answerAmortecimento{2,1}) str2double(answerAmortecimento{3,1}); str2double(answerAmortecimento{4,1}) str2double(answerAmortecimento{5,1})]
+C = [str2double(answerAmortecimento{2,1}) str2double(answerAmortecimento{3,1}); str2double(answerAmortecimento{4,1}) str2double(answerAmortecimento{5,1})]
 
-% Vetor de forças
-
-F = [str2double(answerForcas{2,1});str2double(answerForcas{3,1})]
 
 % Condições iniciais do problema
 
@@ -58,7 +48,7 @@ prompt = {'Entre com as condições iniciais',...
           'Corpo 2','Posição inicial:','Velocidade inicial:'};
 dlgtitle = 'Condições iniciais, PARTE 5/5';
 dims = [0 50;0 30;1 30;1 30;0 30;1 30;1 30];
-definput = {'','','0','1','','0','0'};
+definput = {'','','0.2','1.0','','0','0'};
 answerCondIni = inputdlg(prompt,dlgtitle,dims,definput,opts);
 
 x10 = str2double(answerCondIni{3,1});
@@ -68,39 +58,53 @@ xdot20 = str2double(answerCondIni{7,1});
 
 
 % Problema de autovalor
-[autovec,autoval] = eig(inv(M)*K);
+[autovec,autoval] = eig(M\K);
 
 % Frequências naturais do sistema
-W = diag(sqrt(autoval)); %frequências naturais
-phi = autovec; %autovetores representando os modos
+W = sort(diag(sqrt(autoval))); %frequências naturais
 
+if W(1,1) == sqrt(autoval(1,1))
+    phi = autovec; %autovetores representando os modos
+else 
+    phi = [autovec(:,2) autovec(:,1)];
+end
 % Transformação modal
 
 Mcursiv = phi'*M*phi;
 Kcursiv = phi'*K*phi;
 Ccursiv = phi'*C*phi;
-Fcursiv = phi'*F;
 
 EtaIni = phi\[x10 x20]';
 EtaDotIni = phi\[xdot10 xdot20]';
 
 % Resolvendo a EDO
-tspan = 10; %tempo total em segundos
-y0 = [xdot10,x10,xdot20,x20]'; %Condições iniciais do problema
-[t,eta] = ode45(@(temp,y) Equacionando(temp,y,Mcursiv,Kcursiv,Ccursiv,phi), tspan, y0);
+tspan = 0: 0.01: 20; %tempo total em segundos
+eta0 = [EtaIni(1,1),EtaDotIni(1,1),EtaIni(2,1),EtaDotIni(2,1)]'; %Condições iniciais do problema
+[t,eta] = ode45(@(temp,y) Equacionando(temp,y,Mcursiv,Kcursiv,Ccursiv,phi), tspan, eta0);
 
+
+x = phi*[eta(:,1)';eta(:,3)'];
+
+subplot (211)
+plot (t,x(1,:));
+xlabel ('t');
+ylabel ('x1 (t)');
+subplot (212)
+plot (t,x(2,:));
+xlabel ('t');
+ylabel ('x2 (t)');
 
 % Equacionando as EDOs
-function eta = Equacionando(t,y,Mcursiv,Kcursiv,Ccursiv,phi)
-F_1 = @(t) 3*cos(t);
-F_2 = @(t) 4*sin(t);
+function ydot = Equacionando(t,y,Mcursiv,Kcursiv,Ccursiv,phi)
+F_1 = @(t) 0*1*cos(3*t);
+F_2 = @(t) 0*2*cos(3*t);
 
 Fcursiv_1 = @(t) phi(1,1)*F_1(t) + phi(2,1)*F_2(t);
 Fcursiv_2 = @(t) phi(1,2)*F_1(t) + phi(2,2)*F_2(t);
 
-eta = zeros(4, 1);
-eta(1) = y(1);
-eta(2) = Mcursiv(1,1)^-1*Fcursiv_1(t)-Mcursiv(1,1)^-1*Ccursiv(1,1)*y(1)+Mcursiv(1,1)^-1*Kcursiv(1,1)*y(2);
-eta(3) = y(3);
-eta(4) = Mcursiv(2,2)^-1*Fcursiv_2(t)-Mcursiv(2,2)^-1*Ccursiv(2,2)*y(3)+Mcursiv(2,2)^-1*Kcursiv(2,2)*y(4);
+ydot = zeros(4, 1);
+ydot(1) = y(2);
+ydot(2) = Mcursiv(1,1)^-1*Fcursiv_1(t)-Mcursiv(1,1)^-1*Ccursiv(1,1)*y(2)+Mcursiv(1,1)^-1*Kcursiv(1,1)*y(1);
+ydot(3) = y(4);
+ydot(4) = Mcursiv(2,2)^-1*Fcursiv_2(t)-Mcursiv(2,2)^-1*Ccursiv(2,2)*y(4)+Mcursiv(2,2)^-1*Kcursiv(2,2)*y(3);
 end
