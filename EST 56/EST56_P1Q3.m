@@ -116,7 +116,7 @@ Xmin = 0.7;
 Xmax = 3.2;
 
 HH = figure('Position',[ 900 300 scrsz(3)*.45 scrsz(4)*.55]); % Posiciona a imagem na tela
-  
+
 for i = 1:length(x(1,:)) % Plot procedural da simulação
     Ycg1 = 0+x(1,i)*100; % Posição em centimetros do CG da massa 1
     Ycg2 = Ycg1+abs(Ymin)+x(2,i)*100; % Posição em centimetros do CG da massa 2
@@ -124,9 +124,8 @@ for i = 1:length(x(1,:)) % Plot procedural da simulação
     % Parametros de dimensão do corpo, arbitrários
     L = 15; 
     H = 0.5;
-    
-    figure(HH)
    
+    figure(HH)
     subplot(2,3,[1,4]) % Subplot dos corpos em movimento
     plot(0,0) % Reseta a imagem do plot
     
@@ -194,8 +193,8 @@ end
 
 % Equacionando as EDOs
 function ydot = Equacionando(t,y,Mcursiv,Kcursiv,Ccursiv,phi)
-F_1 = @(t) 1*cos(3*t);
-F_2 = @(t) 2*cos(3*t);
+F_1 = @(t) 1*cos(1.415*t);
+F_2 = @(t) 0*cos(3*t);
 
 Fcursiv_1 = @(t) phi(1,1)*F_1(t) + phi(2,1)*F_2(t);
 Fcursiv_2 = @(t) phi(1,2)*F_1(t) + phi(2,2)*F_2(t);
