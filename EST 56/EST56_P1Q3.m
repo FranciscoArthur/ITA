@@ -193,7 +193,7 @@ end
 
 % Equacionando as EDOs
 function ydot = Equacionando(t,y,Mcursiv,Kcursiv,Ccursiv,phi)
-F_1 = @(t) 1*cos(1.415*t);
+F_1 = @(t) 3*cos(1*t);
 F_2 = @(t) 0*cos(3*t);
 
 Fcursiv_1 = @(t) phi(1,1)*F_1(t) + phi(2,1)*F_2(t);
