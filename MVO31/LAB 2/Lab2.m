@@ -3,7 +3,7 @@ s = 16.25;% m2
 Pmax_s = 216253; %W
 
 
-P = @(delt,eta,rho) = delt*eta*(rho/1.225)^0.6*Pmax_s; %W
+P = @(delt,eta,rho) delt*eta*(rho/1.225)^0.6*Pmax_s; %W
 Cd0 = 0.026;
 k = 0.054;
 
