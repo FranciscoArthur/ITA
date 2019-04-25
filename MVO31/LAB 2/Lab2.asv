@@ -3,7 +3,7 @@ s = 16.25;% m2
 Pmax_s = 216253; %W
 
 
-P = @(delt,eta,rho) delt*eta*(rho/1.225)^0.6*Pmax_s; %W
+P = @(delt,eta,rho) delt*eta*(rho./1.225).^0.6*Pmax_s; %W
 Cd0 = 0.026;
 k = 0.054;
 
@@ -118,7 +118,7 @@ deflexProfundVclimbMax = fsolve(@(delta)CM(alfaVclimbMax,delta),0.5)
 %% Item 8
 VclimbTeto = 5;
 
-TetoVoo = @(rhoTeto) W*VclimbTeto + 2*W*sqrt(k*Cd0) - P(1,eta,rhoTeto); % corrigir
+TetoVoo = @(rhoTeto) W*VclimbTeto + (4/3)*sqrt(2*W^3/(rhoTeto*s)*sqrt(3*k^3*Cd0)) - P(1,eta,rhoTeto); % corrigir
 
 rhoTeto = fsolve(TetoVoo, 0.8);
 
@@ -129,8 +129,107 @@ Hteto = HtetoAux(rhoTetoAuxPosic(1,1))
 clear HtetoAux rhoTetoAux rhoTetoAuxPosic
 
 %% Item 9
-HEnvel = linspace(0,80000,10000);
+HEnvel = linspace(0,Hteto,100);
 Vclimb = 5;
 [~,~,~,rhoEnvel] = atmosisa(HEnvel);
+rhoEnvel = rhoEnvel';
 
-Vreq = [0.5*rhoEnvel*s*Cd0 0 0 (W*Vclimb - P(1,eta,rhoEnvel)) 2*k*W^2/(rhoE
+PoliVreq = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
+
+Vreq = zeros(length(rhoEnvel),1);
+Vreq2 = zeros(length(rhoEnvel),1);
+
+for i = 1:length(rhoEnvel)
+VreqAux = sort(roots(PoliVreq(i,:)));
+Vreq(i) = VreqAux(1,1);
+Vreq2(i) = VreqAux(2,1);
+end
+
+HEnvel = [HEnvel HEnvel];
+Vreq = [Vreq' sort(Vreq2','descend')];
+Vstall = sqrt(2*W./(rhoEnvel*s*CLmax));
+
+figure
+area(Vreq,HEnvel)
+hold on
+plot(Vstall, HEnvel(1,1:100))
+grid on
+
+%% Item 10
+
+HEnvel1 = linspace(0,Hteto,100);
+Vclimb = linspace(1,5,5);
+[~,~,~,rhoEnvel] = atmosisa(HEnvel1);
+rhoEnvel = rhoEnvel';
+
+PoliVreq1 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(1) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
+
+PoliVreq2 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(2) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
+
+PoliVreq3 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(3) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
+
+PoliVreq4 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(4) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
+
+PoliVreq5 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(5) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
+
+
+
+Vreq1 = zeros(length(rhoEnvel),1);
+Vreq12 = zeros(length(rhoEnvel),1);
+Vreq2 = zeros(length(rhoEnvel),1);
+Vreq22 = zeros(length(rhoEnvel),1);
+Vreq3 = zeros(length(rhoEnvel),1);
+Vreq32 = zeros(length(rhoEnvel),1);
+Vreq4 = zeros(length(rhoEnvel),1);
+Vreq42 = zeros(length(rhoEnvel),1);
+Vreq5 = zeros(length(rhoEnvel),1);
+Vreq52 = zeros(length(rhoEnvel),1);
+
+for i = 1:length(rhoEnvel)
+VreqAux1 = sort(roots(PoliVreq1(i,:)));
+Vreq1(i) = VreqAux1(1,1);
+Vreq12(i) = VreqAux1(2,1);
+
+VreqAux2 = sort(roots(PoliVreq2(i,:)));
+Vreq2(i) = VreqAux2(1,1);
+Vreq22(i) = VreqAux2(2,1);
+
+VreqAux3 = sort(roots(PoliVreq3(i,:)));
+Vreq3(i) = VreqAux3(1,1);
+Vreq32(i) = VreqAux3(2,1);
+
+VreqAux4 = sort(roots(PoliVreq4(i,:)));
+Vreq4(i) = VreqAux4(1,1);
+Vreq42(i) = VreqAux4(2,1);
+
+VreqAux5 = sort(roots(PoliVreq5(i,:)));
+Vreq5(i) = VreqAux5(1,1);
+Vreq52(i) = VreqAux5(2,1);
+end
+
+HEnvel1 = [HEnvel1 HEnvel1];
+Vreq1 = [Vreq1' sort(Vreq12','descend')];
+
+Vreq2 = [Vreq2' sort(Vreq22','descend')];
+
+Vreq3 = [Vreq3' sort(Vreq32','descend')];
+
+Vreq4 = [Vreq4' sort(Vreq42','descend')];
+
+Vreq5 = [Vreq5' sort(Vreq52','descend')];
+
+figure
+h1=area(Vreq1,HEnvel1);
+h1.FaceColor = [1 1 0]
+hold on
+h2=area(Vreq2,HEnvel1);
+h2.FaceColor = [1 0 1]
+h3=area(Vreq3,HEnvel1);
+h3.FaceColor = [1 0 0]
+h4=area(Vreq4,HEnvel1);
+h4.FaceColor = [0 0 1]
+h5=area(Vreq5,HEnvel1);
+h5.FaceColor = [0 0 0]
+grid on
+
+legend('Razão de Subida 1 m/s', 'Razão de Subida 2 m/s', 'Razão de Subida 3 m/s', 'Razão de Subida 4 m/s', 'Razão de Subida 5 m/s')
