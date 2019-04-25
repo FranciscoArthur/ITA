@@ -28,9 +28,13 @@ figure
 plot(Vel,Preq)
 hold on
 grid on
-plot(Vel,Pmax_s*ones(1,1000))
-plot(Vstall*ones(1,1000), linspace(0,max(Preq),1000))
+plot(Vel,Pmax_s*ones(1,1000),'--r')
+plot(Vstall*ones(1,1000), linspace(0,max(Preq),1000),'--k')
 hold off
+xlabel('Velocidade [m/s]')
+ylabel('Potência [W]')
+title('Gráfico da potência requerida numa dada velocidade');
+legend('Potência requerida','Potência máxima','Velocidade de estol');
 
 %% item 3
 % Caso do grafico
@@ -88,6 +92,8 @@ PreqVarAlt =  W*Vclimb +0.5*rhoVarAlt*Vel.^3*s*Cd0+2*k*W^2./(rhoVarAlt*Vel*s);
 figure
 plot(Vel,PreqVarAlt)
 grid on
+xlabel('Velocidade [m/s]')
+ylabel('Potencia requerida [W]')
 legend('Altitude 0 m', 'Altitude 5000 m', 'Altitude 10000 m', 'Altitude 15000 m', 'Altitude 20000 m');
 
 % Variando a Vclimb
@@ -100,6 +106,8 @@ PreqVarRazSub =  W*VclimbVarRazSub +0.5*rhoVarRazSub*Vel.^3*s*Cd0+2*k*W^2./(rhoV
 figure
 plot(Vel,PreqVarRazSub)
 grid on
+xlabel('Velocidade [m/s]');
+ylabel('Potência requerida [W]');
 legend('Razão de subida 0 m/s', 'Razão de subida 50 m/s', 'Razão de subida 100 m/s', 'Razão de subida 150 m/s', 'Razão de subida 200 m/s');
 
 %% Item 7
@@ -153,6 +161,9 @@ figure
 area(Vreq,HEnvel)
 hold on
 plot(Vstall, HEnvel(1,1:100),'LineWidth',2)
+xlabel('Velocidade [m/s]')
+ylabel('Altitude da aeronave [m]')
+title('Envelope de voo da aeronave')
 grid on
 hold off
 
@@ -221,18 +232,41 @@ Vreq5 = [Vreq5' sort(Vreq52','descend')];
 
 figure
 h1=area(Vreq1,HEnvel1);
-h1.FaceColor = [1 1 0]
+h1.FaceColor = [0.8 0.8 0];
 hold on
 h2=area(Vreq2,HEnvel1);
-h2.FaceColor = [1 0 1]
+h2.FaceColor = [0.8 0 0.8];
 h3=area(Vreq3,HEnvel1);
-h3.FaceColor = [1 0 0]
+h3.FaceColor = [0.8 0 0];
 h4=area(Vreq4,HEnvel1);
-h4.FaceColor = [0 0 1]
+h4.FaceColor = [0 0 0.8];
 h5=area(Vreq5,HEnvel1);
-h5.FaceColor = [0 0 0]
+h5.FaceColor = [0 0 0];
 plot(Vstall, HEnvel(1,1:100),'LineWidth',2)
 grid on
 hold off
 
+xlabel('Velocidade [m/s]')
+ylabel('Altitude [m]')
 legend('Razão de Subida 1 m/s', 'Razão de Subida 2 m/s', 'Razão de Subida 3 m/s', 'Razão de Subida 4 m/s', 'Razão de Subida 5 m/s')
+title('Envelope de voo da aeronave para várias razões de subida')
+
+%% Item 11
+
+[~,~,~,rhoDisp] = atmosisa(Hteto/2);
+Vel = linspace(1,25);
+VclimbDisp = 0;
+
+Treq = W*VclimbDisp./Vel + 0.5*rhoDisp*Vel.^2*s*Cd0 + 2*k*W^2./(rhoDisp*s*Vel.^2);
+TDisp = P(1,eta,rhoDisp)./Vel;
+
+figure
+plot(Vel,Treq)
+hold on
+plot(Vel,TDisp)
+hold off
+grid on
+xlabel('Velocidade [m/s]');
+ylabel('Tração [N]')
+title('Gráfico da velocidade em função da tração')
+legend('Tração requerida', 'Tração disponível')
