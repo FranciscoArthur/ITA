@@ -14,8 +14,8 @@ M = [col1, col2, col3];
 
 Mpinv = (M' * M)^-1 * M';
 vr = r * Mpinv * [w1; w2; w3; w4];
-% cm = [xcm; ycm; 0];
-cm = [0; 0; 0];
+ cm = [xcm; ycm; 0];
+%cm = [0; 0; 0];
 vcm = [vr(1); vr(2); 0] + cross([0; 0; vr(3)], cm);
 w = vr(3);
 
