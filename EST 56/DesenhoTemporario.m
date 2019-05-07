@@ -2,13 +2,13 @@ m = 1; %kg
 c = 1; 
 k = 1;
 
-m2 = 1;
+m2 = 5;
 k2 = 1;
 
 M = [ m 0; 0 m2];
-%K = [k+k2 -k2; -k2 k2];
+K = [k+k2 -k2; -k2 k2];
 C = [c 0; 0 0];
-K = [2 -1; -1 2];
+%K = [2 -1; -1 2];
 F0 = 3;
 
 % Frequências naturais do sistema
@@ -48,7 +48,7 @@ xlabel ('w/w_1');
 ylabel ('X_1*K/F_1_0');
 grid on;
 subplot (212);
-plot (wFor/W1d, (X2*k/F0),'k');
+plot (wFor/W1d, abs(X2*k/F0),'k');
 xlabel ('w/w_1');
 ylabel ('X_2*K/F_1_0');
 grid on
