@@ -1,6 +1,6 @@
-function deriveRobotDynamicEquations()
 
 syms w1 w2 w3 w4 r l N m Icm xcm ycm real
+syms tal1 tal2 tal3 tal4
 
 % alpha = deg2rad([33; 147; 225; 315]); % Skuba
 alpha = deg2rad([45; 135; 225; 315]); % ITAndroids
@@ -36,34 +36,34 @@ H2 = subs(dLdw, [w1 w2 w3 w4], [0 1 0 0]);
 H3 = subs(dLdw, [w1 w2 w3 w4], [0 0 1 0]);
 H4 = subs(dLdw, [w1 w2 w3 w4], [0 0 0 1]);
 
-H = [H1, H2, H3, H4]
+H = simplify([H1, H2, H3, H4]);
 
 
 %% atualizar
 
 sysName = 'my_ODE';
 Q_e = {tal1 tal2 tal3 tal4}; %forças externas
-par = {m r l ycm xcm Icm}; %p
-VF = ?;
+par = {m r l ycm xcm Icm}; %parametros
+Output = H;
 
 m_fileName  = strcat(sysName,'.m');
 s_fileName  = strcat(sysName,'_block');
 s_blockName = strcat(s_fileName,'/',sysName);
 
-Q_vars = Q_e(cellfun('isclass', Q_e, 'sym'));
-Q_vars = subs(Q_vars,X2n,Xt2n);
+%Q_vars = Q_e(cellfun('isclass', Q_e, 'sym'));
+%Q_vars = subs(Q_vars,X2n,Xt2n);
 
 % create MATLAB function
-matlabFunction(VF,...
+matlabFunction(Output,...
     'file',     m_fileName,...
-    'vars',   [{'t','Y'}, Q_vars, par],...
-    'outputs', {'dYdt'});
+    'vars',   [ Q_e, par],...
+    'outputs', {'Vw_dot'});
 % create Simulink block
 new_system  (s_fileName)
-matlabFunctionBlock(s_blockName,VF,...
+matlabFunctionBlock(s_blockName,Output,...
     'functionName', sysName,...
-    'vars',       [{'t','Y'}, Q_vars, par],...
-    'outputs',     {'dYdt'});
+    'vars',       [Q_e, par],...
+    'outputs',     {'Vw_dot'});
 save_system (s_fileName)
 close_system(s_fileName)
 
@@ -72,5 +72,3 @@ close_system(s_fileName)
 % Id = subs(dLdw1, [w1 w2 w3 w4], [1 0 0 0])
 % Iwc = subs(dLdw1, [w1 w2 w3 w4], [0 1 0 0])
 % Isc = subs(dLdw1, [w1 w2 w3 w4], [0 0 1 0])
-
-end
