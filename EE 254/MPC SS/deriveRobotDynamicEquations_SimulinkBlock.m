@@ -6,7 +6,7 @@
 % autogerar uma função e um bloco no simulink que utilizam os resultados
 % desse código.
 % 
-% Versão 1: 07/05/2019
+% Versão 1.0: 07/05/2019
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -62,7 +62,7 @@ H = simplify([H1, H2, H3, H4]);
 
 sysName = 'RobotDynamicMatrixH'; %nome dos arquivos
 par = {m r l ycm xcm Icm}; %parametros
-Output = H+Input; %operação
+Output = H; %operação
 
 m_fileName  = strcat(sysName,'.m');
 s_fileName  = strcat(sysName,'_block');
@@ -82,3 +82,11 @@ matlabFunctionBlock(s_blockName,Output,...
 save_system (s_fileName)
 close_system(s_fileName)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Observação importante:
+% 
+% Após auto gerar o código, 
+% deve-se adicionar a seguinte linha
+% no final do código:
+% InputPlusH = (InputPlusH + Input);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
