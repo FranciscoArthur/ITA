@@ -50,7 +50,7 @@ bqp = [onesM*dumax; -onesM*dumin; onesM*(umax - uk1); onesM*(uk1 - umin); onesN*
 
 fqp = 2*G'*(f - r);
 
-options = optimset('Algorithm','active-set','Display','final');
+options = optimset('Algorithm','interior-point-convex','Display','final');
 DUk = quadprog(Hqp,fqp,Aqp,bqp,[],[],[],[],[],options);
 
 sys =  DUk(1); % S-function output (control increment)
