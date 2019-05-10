@@ -53,7 +53,9 @@ fqp = 2*G'*(f - r);
 options = optimset('Algorithm','interior-point-convex','Display','final');
 DUk = quadprog(Hqp,fqp,Aqp,bqp,[],[],[],[],[],options);
 
+
 sys =  DUk(1); % S-function output (control increment)
+
 
 end
 
