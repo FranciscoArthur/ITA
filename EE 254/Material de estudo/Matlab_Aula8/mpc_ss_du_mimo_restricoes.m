@@ -46,7 +46,7 @@ bqp = [repmat(dumax,M,1); -repmat(dumin,M,1); repmat((umax - uk1),M,1); repmat((
 
 fqp = 2*Gn'*(f - r);
 
-options = optimset('Algorithm','active-set','Display','final');
+options = optimset('Algorithm','interior-point-convex','Display','final');
 DUk = quadprog(Hqp,fqp,Aqp,bqp,[],[],[],[],[],options);
 
 sys =  DUk(1:p); % Saída da S-function (incremento nos p controles)
