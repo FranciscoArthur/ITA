@@ -36,3 +36,7 @@ D = [0];
 % Discretizacao
 T = 0.005;
 [A,B] = c2dm(Ac,Bc,C,D,T,'zoh');
+
+% Filtro derivativo
+numd = [1/T -1/T]
+dend = [1 0]
