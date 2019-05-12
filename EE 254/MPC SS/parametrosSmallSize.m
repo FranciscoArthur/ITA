@@ -15,8 +15,8 @@ InerciaRoda = 2.1602e-05;
 ConstanteTorqueMotor = 1;
 CoefAtritViscMotor = 1;
 CoefAtritViscRoda = 1;
-yp_equilibrio = [0]';
-up_equilibrio = [0]';
+w_equilibrio = [0]';
+u_equilibrio = [0]';
 
 % Matrizes do espaço de estados
 Jeq = (redu^2*eta*InerciaMotor+InerciaRoda)*eye(4);
@@ -37,6 +37,3 @@ D = [0];
 T = 0.005;
 [A,B] = c2dm(Ac,Bc,C,D,T,'zoh');
 
-% Filtro derivativo
-numd = [1/T -1/T]
-dend = [1 0]
