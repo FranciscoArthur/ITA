@@ -7,17 +7,17 @@ Rot =@(thet) [cos(thet) -sin(thet); sin(thet) cos(thet)];
 
 a = cos(linspace(0,2*pi));
 b = sin(linspace(0,2*pi));
-X = [x;y];
+X = [x,y];
 
 
 
 
 for i = 1:length(X)%para ver o movimento da bola
     
-    Xc = X(:,i);
+    Xc = X(i,:);
     thetai = theta(i);
     
-    plot(X(1,:),X(2,:),'--r')
+    plot(X(:,1),X(:,2),'--r')
     hold on
     plot(xtraj,ytraj,'k')
     
@@ -47,8 +47,8 @@ for i = 1:length(X)%para ver o movimento da bola
     arot = ABrot(1,:);
     brot = ABrot(2,:);
     
-    patch(2*0.085*arot+Xini(1,1)+Xc(1,1),2*0.085*brot+Xini(2,1)+Xc(2,1),'k')
-    patch(2*0.05*a+Xini(1,1)+Xc(1,1),2*0.05*b+Xini(2,1)+Xc(2,1),rgb('blue'));
+    patch(2*0.085*arot+Xini(1,1)+Xc(1,1),2*0.085*brot+Xini(2,1)+Xc(1,2),'k')
+    patch(2*0.05*a+Xini(1,1)+Xc(1,1),2*0.05*b+Xini(2,1)+Xc(1,2),rgb('blue'));
   
     %% gerando animação
     %bal movimento+video
