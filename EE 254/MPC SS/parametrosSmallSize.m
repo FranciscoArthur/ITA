@@ -1,6 +1,8 @@
 clear,clc,close all
 
 % Parametros fisicos
+alpha = deg2rad([45; 135; 225; 315]); % ITAndroids
+beta = [0; 0; 0; 0];
 ResistMot = 1;
 m = 0.9;
 r = 51.5*10^-3;
@@ -17,6 +19,11 @@ CoefAtritViscMotor = 1;
 CoefAtritViscRoda = 1;
 w_equilibrio = [0]';
 u_equilibrio = [0]';
+
+M = [-sin(alpha(1,1)+beta(1,1)), cos(alpha(1,1)+beta(1,1)), l*cos(beta(1,1));...
+     -sin(alpha(2,1)+beta(2,1)), cos(alpha(2,1)+beta(2,1)), l*cos(beta(2,1));...
+     -sin(alpha(3,1)+beta(3,1)), cos(alpha(3,1)+beta(3,1)), l*cos(beta(3,1));...
+     -sin(alpha(4,1)+beta(4,1)), cos(alpha(4,1)+beta(4,1)), l*cos(beta(4,1))];
 
 % Matrizes do espaço de estados
 Jeq = (redu^2*eta*InerciaMotor+InerciaRoda)*eye(4);
