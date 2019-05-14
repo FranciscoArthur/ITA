@@ -1,5 +1,16 @@
 function robotTrajectoryAnimation(xtraj,ytraj,x,y,theta)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Função que gera uma animação da simulação do Robô Small Size 
+%  no campo de Div. B. Feito para projeto de controlador, 
+%  recebe a trajetoria de referência e a trajetoria real.
+%  
+%     Leva em conta a posição do robô e o ângulo dele com a trajetória.
+%  
+%     Feito em 13/05/2019
+%     Autor: Arthur Azevedo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Xini = [0;0];
 
 %rotação
@@ -9,6 +20,8 @@ a = cos(linspace(0,2*pi));
 b = sin(linspace(0,2*pi));
 X = [x,y];
 
+limx = max(X(:,1))*1.2;
+limy = max(X(:,2))*1.2;
 
 
 
@@ -17,21 +30,22 @@ for i = 1:length(X)%para ver o movimento da bola
     Xc = X(i,:);
     thetai = theta(i);
     
-    plot(X(:,1),X(:,2),'--r')
+    plot(X(:,1),X(:,2),'--r')% trajetória do controle
     hold on
-    plot(xtraj,ytraj,'k')
+    plot(xtraj,ytraj,'k')% trajetória de referência
     
     
     %campo
     plot([0 0 0 -6 6],[9 -9 0 0 0],'k','LineWidth',0.5) %regiões do campo
     hold all
-    xlim([-3 3])
-    ylim([-5 5])
+    xlim([-limx limx])
+    ylim([-limy limy])
     axis equal
     xlabel('X(m)', 'FontSize',14)
     ylabel('Y(m)', 'FontSize',14)
+    title('Trajetória do robô sobre o campo','FontSize',14)
     set(gca, 'FontSize',14)
-    grid on
+    grid minor
     plot(a,b,'k','Linewidth',0.5) %centro
     plot([6 6 -6 -6 6],[9 -9 -9 9 9],'k','LineWidth',0.5) %limites do campo
 
@@ -54,13 +68,12 @@ for i = 1:length(X)%para ver o movimento da bola
     %bal movimento+video
     
     hold off
-    %plot(0,0)
-    %hold on
+
     %videoFrame(i) = getframe(gcf);
     pause(0.07)
 end
 
-%     video = VideoWriter('SimulGolOlimpico','MPEG-4');
+%     video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
 %     video.FrameRate = 20;
 %     open(video);
 %     writeVideo(video,videoFrame);
