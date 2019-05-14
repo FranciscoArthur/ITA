@@ -1,35 +1,49 @@
 function robotTrajectoryAnimation(xtraj,ytraj,x,y,theta)
 
-Xini = [x(1,1);y(1,1)];
+%%%%%%%%%%%%%%%%%%%%
+ Função que gera uma animação da simulação do Robô Small Size 
+ no campo de Div. B. Feito para projeto de controlador, 
+ recebe a trajetoria de referência e a trajetoria real.
+ 
+ Leva em conta a posição do robô e o ângulo dele com a trajetória.
+ 
+%%%%%%%%%%%%%%%%%%%%
+
+Xini = [0;0];
 
 %rotação
 Rot =@(thet) [cos(thet) -sin(thet); sin(thet) cos(thet)];
 
 a = cos(linspace(0,2*pi));
 b = sin(linspace(0,2*pi));
-X = [x;y];
+X = [x,y];
 
+limx = max(X(:,1))*1.2;
+limy = max(X(:,2))*1.2;
 
 
 
 for i = 1:length(X)%para ver o movimento da bola
     
-    Xc = X(:,i);
+    Xc = X(i,:);
     thetai = theta(i);
     
-    plot(X(1,:),X(2,:),'--r')
+    plot(X(:,1),X(:,2),'--r')% trajetória do controle
     hold on
+    plot(xtraj,ytraj,'k')% trajetória de referência
     
     
     %campo
     plot([0 0 0 -6 6],[9 -9 0 0 0],'k','LineWidth',0.5) %regiões do campo
     hold all
-    xlim([-3 3])
-    ylim([-5 5])
+    xlim([-limx limx])
+    ylim([-limy limy])
+    axis equal
     xlabel('X(m)', 'FontSize',14)
     ylabel('Y(m)', 'FontSize',14)
+    title('Trajetória do robô sobre o campo','FontSize',14)
     set(gca, 'FontSize',14)
-    grid on
+    grid minor
     plot(a,b,'k','Linewidth',0.5) %centro
     plot([6 6 -6 -6 6],[9 -9 -9 9 9],'k','LineWidth',0.5) %limites do campo
 
@@ -45,8 +59,8 @@ for i = 1:length(X)%para ver o movimento da bola
     arot = ABrot(1,:);
     brot = ABrot(2,:);
     
-    patch(2*0.085*arot+Xini(1,1)+Xc(1,1),2*0.085*brot+Xini(2,1)+Xc(2,1),'k')
-    patch(2*0.05*a+Xini(1,1)+Xc(1,1),2*0.05*b+Xini(2,1)+Xc(2,1),rgb('blue'));
+    patch(2*0.085*arot+Xini(1,1)+Xc(1,1),2*0.085*brot+Xini(2,1)+Xc(1,2),'k')
+    patch(2*0.05*a+Xini(1,1)+Xc(1,1),2*0.05*b+Xini(2,1)+Xc(1,2),rgb('blue'));
   
     %% gerando animação
     %bal movimento+video
