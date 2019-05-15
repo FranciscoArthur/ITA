@@ -17,8 +17,6 @@ InerciaRoda = 2.1602e-05;
 ConstanteTorqueMotor = 1;
 CoefAtritViscMotor = 1;
 CoefAtritViscRoda = 1;
-w_equilibrio = [0]';
-u_equilibrio = [0]';
 
 M_2 = [-sin(alpha(1,1)+beta(1,1)), cos(alpha(1,1)+beta(1,1)), l*cos(beta(1,1));...
      -sin(alpha(2,1)+beta(2,1)), cos(alpha(2,1)+beta(2,1)), l*cos(beta(2,1));...
