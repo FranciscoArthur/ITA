@@ -70,7 +70,7 @@ for i = 1:length(X)%para ver o movimento da bola
     hold off
 
     %videoFrame(i) = getframe(gcf);
-    pause(0.07)
+    pause(0.000000000007)
 end
 
 %     video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
