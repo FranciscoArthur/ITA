@@ -1,4 +1,4 @@
-function [sys,dummy0,str,ts] = mpc_ss_du_mimo(t,dummy,inputs,flag,KMPC,Phi,p,q,n,N,T)
+function [sys,dummy0,str,ts] = mpc_ss_du_mimo(t,dummy,inputs,flag,p,q,n,N,T)
 
 % Parâmetros de entrada:
 % KMPC: Vetor de ganho (p x qN)
@@ -31,13 +31,31 @@ case 3 % Evaluate Function
 
 yref = inputs(1:q); % yref(k)
 xk = inputs(q+1:q+n);  % x(k)
-uk1 = inputs(q+n+1:end); % u(k-1)
+uk1 = inputs(q+n+1:end-1); % u(k-1)
+wr = inputs(end); % velocidade angular de referencia
 
 xik = [xk;uk1]; % Estado aumentado xi(k)
     
 % Valores futuros de referência
 r = repmat(yref,N,1);
     
+Ac = [0  wr 0;
+     -wr 0  0;
+      0  0  0];
+     
+Bc = -eye(3);
+
+C = eye(3);
+
+D = zeros(3,3);
+
+% Discretizacao
+T = 0.005;
+[A,B] = c2dm(Ac,Bc,C,D,T,'zoh');
+
+
+[KMPC,Phi] = matrizes_ss_du_mimo(A,B,C,N,M,mu,rho);
+
 % Resposta livre
 f = Phi*xik;
 
