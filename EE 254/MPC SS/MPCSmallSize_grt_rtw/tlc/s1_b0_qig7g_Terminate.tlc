@@ -1,0 +1,32 @@
+%implements s1_b0_qig7g_Terminate "C"
+
+%function Terminate(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcTerminateFcnOfS1B1 = OpaqueTLCBlockFcn("Terminate", 1, 1, 0, 8)
+%assign tlcTerminateFcnOfS1B5 = OpaqueTLCBlockFcn("Terminate", 1, 5, 0, 8)
+%assign tlcCleanupRuntimeResourcesFcnOfS1B5 = OpaqueTLCBlockFcn("CleanupRuntimeResources", 1, 5, 0, 8)
+%if !WHITE_SPACE(tlcTerminateFcnOfS1B1)
+/* Terminate for ToWorkspace: '<Root>/To Workspace1' */
+%<tlcTerminateFcnOfS1B1>\
+%endif
+%if !WHITE_SPACE(tlcTerminateFcnOfS1B5)
+/* Terminate for S-Function (mpc_ss_du_mimo): '<S1>/Controlador' */
+%<tlcTerminateFcnOfS1B5>\
+%endif
+%if !WHITE_SPACE(tlcCleanupRuntimeResourcesFcnOfS1B5)
+/* CleanupRuntimeResources for S-Function (mpc_ss_du_mimo): '<S1>/Controlador' */
+%<tlcCleanupRuntimeResourcesFcnOfS1B5>\
+%endif
+%closefile cfgTxt
+%<cfgTxt>
+%endfunction
+%function TerminateFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Terminate(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 8, fcnProtoType)>
+%endfunction
