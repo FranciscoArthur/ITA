@@ -23,8 +23,6 @@ M_2 = [-sin(alpha(1,1)+beta(1,1)), cos(alpha(1,1)+beta(1,1)), l*cos(beta(1,1));.
      -sin(alpha(3,1)+beta(3,1)), cos(alpha(3,1)+beta(3,1)), l*cos(beta(3,1));...
      -sin(alpha(4,1)+beta(4,1)), cos(alpha(4,1)+beta(4,1)), l*cos(beta(4,1))];
 
-
-
 Jeq = (redu^2*eta*InerciaMotor+InerciaRoda)*eye(4);
 Hj = RobotDynamicMatrixH(Jeq,m,r,l,ycm,xcm,InerciaCM);
 
