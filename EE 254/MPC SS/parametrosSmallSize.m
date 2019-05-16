@@ -25,28 +25,6 @@ M = [-sin(alpha(1,1)+beta(1,1)), cos(alpha(1,1)+beta(1,1)), l*cos(beta(1,1));...
      -sin(alpha(3,1)+beta(3,1)), cos(alpha(3,1)+beta(3,1)), l*cos(beta(3,1));...
      -sin(alpha(4,1)+beta(4,1)), cos(alpha(4,1)+beta(4,1)), l*cos(beta(4,1))];
 
-% Matrizes do espaço de estados
-
-% %% linearizando no MatLab
-% % Essa linearização demora muito, então recomenda-se linearizar 1 vez
-% % e guardar o valor das matrizes A, B, C e D e comentar o código
-% % Cuidado ao tirar as matrizes do resultado! Sai como 7x7 ou 7x4 e
-% % deve-se tirar as correspondentes a Integrator(1), Integrator(2) etc.
-%
-% sys = 'ModelSmallSize';
-% open_system(sys)
-% 
-% % Nome do caminho para o bloco que se deseja linearizar
-% blockpath = 'ModelSmallSize/Modelo do robô Small Size';
-% 
-% % Linearize the specified block at the model operating point.
-% linsys = linearize(sys,blockpath);
-% 
-% %%
-
-
-
-
 Jeq = (redu^2*eta*InerciaMotor+InerciaRoda)*eye(4);
 Hj = RobotDynamicMatrixH(Jeq,m,r,l,ycm,xcm,InerciaCM);
 
