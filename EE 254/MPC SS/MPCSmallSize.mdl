@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.542"
+    ComputedModelVersion    "1.543"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -68,8 +68,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[2522.0, 875.0]
-	ZoomFactor		[1.25]
-	Offset			[-304.9299978017807, 2.8400045156477867]
+	ZoomFactor		[1.0]
+	Offset			[-513.32999780178056, -71.15999548435218]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -103,9 +103,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Pichau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed May 15 13:48:58 2019"
-  RTWModifiedTimeStamp	  479827670
-  ModelVersionFormat	  "1.%<AutoIncrement:542>"
+  LastModifiedDate	  "Fri May 17 20:19:00 2019"
+  RTWModifiedTimeStamp	  480024969
+  ModelVersionFormat	  "1.%<AutoIncrement:543>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -730,7 +730,7 @@ Model {
 	      Version		      "1.17.0"
 	      Array {
 		Type			"Cell"
-		Dimension		19
+		Dimension		18
 		Cell			"GeneratePreprocessorConditionals"
 		Cell			"IncludeMdlTerminateFcn"
 		Cell			"RemoveDisableFunc"
@@ -749,7 +749,6 @@ Model {
 		Cell			"SupportNonInlinedSFcns"
 		Cell			"ExistingSharedCode"
 		Cell			"GenerateAllocFcn"
-		Cell			"CombineOutputUpdateFcns"
 		PropName		"DisabledProps"
 	      }
 	      Description	      ""
@@ -1161,7 +1160,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "125"
+    ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "110"
     Block {
@@ -1299,12 +1298,9 @@ Model {
       BlockType		      Constant
       Name		      "A"
       SID		      "105"
-      Position		      [-165, 140, -135, 170]
+      Position		      [-380, 85, -350, 115]
       ZOrder		      29
-      BlockRotation	      270
-      BlockMirror	      on
       BackgroundColor	      "orange"
-      NamePlacement	      "alternate"
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
@@ -1313,12 +1309,9 @@ Model {
       BlockType		      Constant
       Name		      "B"
       SID		      "106"
-      Position		      [-210, 110, -180, 140]
+      Position		      [-380, 145, -350, 175]
       ZOrder		      30
-      BlockRotation	      270
-      BlockMirror	      on
       BackgroundColor	      "orange"
-      NamePlacement	      "alternate"
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
@@ -1328,7 +1321,7 @@ Model {
       BlockType		      Clock
       Name		      "Clock"
       SID		      "104"
-      Position		      [-210, 265, -190, 285]
+      Position		      [-375, 330, -355, 350]
       ZOrder		      28
     }
     Block {
@@ -1336,7 +1329,7 @@ Model {
       Name		      "Controlador Preditivo MIMO\nempregando realimentação\nde estado"
       SID		      "1"
       Ports		      [3, 1]
-      Position		      [260, 207, 375, 303]
+      Position		      [260, 202, 395, 308]
       ZOrder		      -13
       BackgroundColor	      "green"
       NamePlacement	      "alternate"
@@ -1350,6 +1343,7 @@ Model {
 	$ObjectID		21
 	$ClassName		"Simulink.Mask"
 	Initialization		"p = length(rho);\nq = length(mu);\nn = p;\n\n\n"
+	IconOpaque		"opaque-with-ports"
 	Array {
 	  Type			  "Simulink.MaskParameter"
 	  Dimension		  5
@@ -1593,7 +1587,7 @@ Model {
       Name		      "Demux"
       SID		      "103"
       Ports		      [1, 3]
-      Position		      [70, 136, 75, 314]
+      Position		      [70, 131, 75, 309]
       ZOrder		      27
       ShowName		      off
       Outputs		      "3"
@@ -1696,7 +1690,7 @@ Model {
       Name		      "MATLAB Function"
       SID		      "98"
       Ports		      [5, 1]
-      Position		      [-120, 158, 30, 292]
+      Position		      [-310, 65, 50, 375]
       ZOrder		      22
       ErrorFcn		      "Stateflow.Translate.translate"
       PermitHierarchicalResolution "ExplicitOnly"
@@ -1704,6 +1698,13 @@ Model {
       RequestExecContextInheritance off
       SFBlockType	      "MATLAB Function"
       Variant		      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		28
+	$ClassName		"Simulink.Mask"
+	Display			"image('LissajousTrajectoru.PNG');"
+	IconOpaque		"opaque-with-ports"
+      }
       System {
 	Name			"MATLAB Function"
 	Location		[223, 338, 826, 833]
@@ -1872,7 +1873,7 @@ Model {
       Name		      "Mux"
       SID		      "15"
       Ports		      [3, 1]
-      Position		      [195, 137, 205, 313]
+      Position		      [195, 132, 205, 308]
       ZOrder		      -15
       ShowName		      off
       Inputs		      "3"
@@ -1910,7 +1911,7 @@ Model {
       BlockType		      Constant
       Name		      "PHIref1"
       SID		      "99"
-      Position		      [-60, 480, -30, 510]
+      Position		      [85, 510, 115, 540]
       ZOrder		      25
       BackgroundColor	      "orange"
       Commented		      "on"
@@ -2153,7 +2154,7 @@ Model {
       BlockType		      Constant
       Name		      "Xref1"
       SID		      "100"
-      Position		      [-60, 360, -30, 390]
+      Position		      [85, 390, 115, 420]
       ZOrder		      23
       BackgroundColor	      "orange"
       Commented		      "on"
@@ -2179,7 +2180,7 @@ Model {
       BlockType		      Constant
       Name		      "Yref1"
       SID		      "101"
-      Position		      [-60, 420, -30, 450]
+      Position		      [85, 450, 115, 480]
       ZOrder		      24
       BackgroundColor	      "orange"
       Commented		      "on"
@@ -2192,12 +2193,9 @@ Model {
       BlockType		      Constant
       Name		      "a"
       SID		      "107"
-      Position		      [-250, 75, -220, 105]
+      Position		      [-380, 205, -350, 235]
       ZOrder		      31
-      BlockRotation	      270
-      BlockMirror	      on
       BackgroundColor	      "orange"
-      NamePlacement	      "alternate"
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
@@ -2207,12 +2205,9 @@ Model {
       BlockType		      Constant
       Name		      "b"
       SID		      "108"
-      Position		      [-285, 50, -255, 80]
+      Position		      [-380, 265, -350, 295]
       ZOrder		      32
-      BlockRotation	      270
-      BlockMirror	      on
       BackgroundColor	      "orange"
-      NamePlacement	      "alternate"
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
@@ -2297,17 +2292,17 @@ Model {
       ZOrder		      1
       SrcBlock		      "Controlador Preditivo MIMO\nempregando realimentação\nde estado"
       SrcPort		      1
-      Points		      [35, 0]
+      Points		      [25, 0]
       Branch {
-	ZOrder			39
+	ZOrder			153
+	DstBlock		"Sum1"
+	DstPort			2
+      }
+      Branch {
+	ZOrder			150
 	Points			[0, -225]
 	DstBlock		"V (em x) (amarelo)\nVn (em y) (roxo)\nW (em phi) (azul)"
 	DstPort			1
-      }
-      Branch {
-	ZOrder			38
-	DstBlock		"Sum1"
-	DstPort			2
       }
     }
     Line {
@@ -2324,7 +2319,7 @@ Model {
       Points		      [44, 0]
       Branch {
 	ZOrder			108
-	Points			[0, -125]
+	Points			[0, -120]
 	DstBlock		"X referencia"
 	DstPort			1
       }
@@ -2341,7 +2336,7 @@ Model {
       Points		      [57, 0]
       Branch {
 	ZOrder			110
-	Points			[0, -125]
+	Points			[0, -120]
 	DstBlock		"Y referencia"
 	DstPort			1
       }
@@ -2393,7 +2388,7 @@ Model {
       Points		      [23, 0]
       Branch {
 	ZOrder			42
-	Points			[0, -120]
+	Points			[0, -115]
 	DstBlock		"Controlador Preditivo MIMO\nempregando realimentação\nde estado"
 	DstPort			3
       }
@@ -2447,8 +2442,8 @@ Model {
       SrcPort		      3
       Points		      [84, 0]
       Branch {
-	ZOrder			60
-	Points			[0, 120]
+	ZOrder			157
+	Points			[0, 125]
 	DstBlock		"Derivative"
 	DstPort			1
       }
@@ -2577,7 +2572,6 @@ Model {
       ZOrder		      104
       SrcBlock		      "B"
       SrcPort		      1
-      Points		      [0, 55]
       DstBlock		      "MATLAB Function"
       DstPort		      2
     }
@@ -2585,7 +2579,6 @@ Model {
       ZOrder		      105
       SrcBlock		      "a"
       SrcPort		      1
-      Points		      [0, 115]
       DstBlock		      "MATLAB Function"
       DstPort		      3
     }
@@ -2593,7 +2586,6 @@ Model {
       ZOrder		      106
       SrcBlock		      "b"
       SrcPort		      1
-      Points		      [0, 165]
       DstBlock		      "MATLAB Function"
       DstPort		      4
     }
@@ -2646,9 +2638,6 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 3 0 0]
     viewObj		    2
-    visible		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    9
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
