@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.543"
+    ComputedModelVersion    "1.546"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -103,9 +103,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Pichau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri May 17 20:19:00 2019"
-  RTWModifiedTimeStamp	  480024969
-  ModelVersionFormat	  "1.%<AutoIncrement:543>"
+  LastModifiedDate	  "Sat May 18 20:40:00 2019"
+  RTWModifiedTimeStamp	  480112163
+  ModelVersionFormat	  "1.%<AutoIncrement:546>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -212,7 +212,7 @@ Model {
 	  DisabledProps		  []
 	  Description		  ""
 	  StartTime		  "0.0"
-	  StopTime		  "8"
+	  StopTime		  "7"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.001"
 	  InitialStep		  "auto"
@@ -1162,7 +1162,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "110"
+    SIDHighWatermark	    "111"
     Block {
       BlockType		      Gain
       Name		      " "
@@ -1275,16 +1275,16 @@ Model {
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1','DataLoggingSaveFormat','Array','DataLogging"
       "Decimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDis"
-      "plays',{struct('MinYLimReal','-5.39766','MaxYLimReal','3.11697','YLabelReal','','MinYLimMag','0.00000','MaxYLimM"
-      "ag','5.39766','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTi"
+      "plays',{struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.00000','MaxYLimM"
+      "ag','1.00000','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTi"
       "ckColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.07450980"
       "39215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.07450980"
       "39215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'T"
       "itle','%<SignalLabel>','LinePropertiesCache',{{[],struct('Color',[0.749019607843137 0 0.749019607843137],'LineSt"
       "yle','-','LineWidth',0.75,'Marker','none','Visible','on'),struct('Color',[0 1 1],'LineStyle','-','LineWidth',0.7"
       "5,'Marker','none','Visible','on')}},'UserDefinedChannelNames',{{'x','y','phi'}},'NumLines',3,'LineNames',{{'x','"
-      "y','phi'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-5.39766','MaxYLim"
-      "Real','3.11697','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','5.39766','LegendVisibility','On','XGrid',tr"
+      "y','phi'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-1.00000','MaxYLim"
+      "Real','1.00000','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.00000','LegendVisibility','On','XGrid',tr"
       "ue,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0."
       "686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353"
       " 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0"
@@ -1342,11 +1342,12 @@ Model {
 	$PropName		"MaskObject"
 	$ObjectID		21
 	$ClassName		"Simulink.Mask"
-	Initialization		"p = length(rho);\nq = length(mu);\nn = p;\n\n\n"
+	Initialization		"p = length(rho);\nq = length(mu);\nn = p;\numin = ulim(:,1);\numax = ulim(:,2);\ndumin = dulim(:,1);"
+	"\ndumax = dulim(:,2);\nymin = ylim(:,1);\nymax = ylim(:,2);\n\n"
 	IconOpaque		"opaque-with-ports"
 	Array {
 	  Type			  "Simulink.MaskParameter"
-	  Dimension		  5
+	  Dimension		  8
 	  Object {
 	    $ObjectID		    22
 	    Type		    "edit"
@@ -1377,6 +1378,27 @@ Model {
 	  }
 	  Object {
 	    $ObjectID		    26
+	    Type		    "edit"
+	    Name		    "dulim"
+	    Prompt		    "[dumin,dumax] (px2)"
+	    Value		    "[-inf inf;-inf inf; -inf inf]"
+	  }
+	  Object {
+	    $ObjectID		    27
+	    Type		    "edit"
+	    Name		    "ulim"
+	    Prompt		    "[umin,umax] (px2)"
+	    Value		    "[-inf inf;-inf inf; -inf inf]"
+	  }
+	  Object {
+	    $ObjectID		    28
+	    Type		    "edit"
+	    Name		    "ylim"
+	    Prompt		    "[ymin,ymax] (qx2)"
+	    Value		    "[-inf inf;-inf inf; -inf inf]"
+	  }
+	  Object {
+	    $ObjectID		    29
 	    Type		    "edit"
 	    Name		    "T"
 	    Prompt		    "Periodo de amostragem"
@@ -1448,7 +1470,7 @@ Model {
 	  Position		  [260, 24, 520, 76]
 	  ZOrder		  -4
 	  FunctionName		  "mpc_ss_du_mimo"
-	  Parameters		  "p,q,n,N,M,mu,rho,T"
+	  Parameters		  "dumax,dumin,umax,umin,ymax,ymin,p,q,n,N,M,mu,rho,T"
 	  SFunctionDeploymentMode off
 	  EnableBusSupport	  off
 	  SFcnIsStateOwnerBlock	  off
@@ -1615,10 +1637,11 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		27
+	$ObjectID		30
 	$ClassName		"Simulink.Mask"
 	Display			"image('Glados.png');"
 	IconOpaque		"opaque-with-ports"
+	RunInitForIconRedraw	"on"
       }
       System {
 	Name			"Dinâmica do\nRobo\nSmall Size\ne_dot = Ae+Bu"
@@ -1700,10 +1723,11 @@ Model {
       Variant		      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		28
+	$ObjectID		31
 	$ClassName		"Simulink.Mask"
 	Display			"image('LissajousTrajectoru.PNG');"
 	IconOpaque		"opaque-with-ports"
+	RunInitForIconRedraw	"on"
       }
       System {
 	Name			"MATLAB Function"
