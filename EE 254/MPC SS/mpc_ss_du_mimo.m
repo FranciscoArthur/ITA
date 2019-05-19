@@ -1,4 +1,4 @@
-function [sys,dummy0,str,ts] = mpc_ss_du_mimo(t,dummy,inputs,flag,p,q,n,N,M,mu,rho,T)
+function [sys,dummy0,str,ts] = mpc_ss_du_mimo(t,dummy,inputs,flag,dumax,dumin,umax,umin,ymax,ymin,p,q,n,N,M,mu,rho,T)
 
 % Parâmetros de entrada:
 % KMPC: Vetor de ganho (p x qN)
@@ -79,12 +79,26 @@ assignin('base','C',C)
 assignin('base','D',D)
 assignin('base','A',A)
 assignin('base','B',B)
+
 [KMPC,Phi] = matrizes_ss_du_mimo(A,B,C,N,M,mu,rho);
+%[Phi,Gn,Hqp,Aqp] = matrizes_ss_du_mimo_restricoes(A,B,C,N,M,mu,rho);
 
 % Resposta livre
 f = Phi*xik;
 
-% Incremento no controle
+
+% %% Cálculo do controle ótimo
+% 
+% bqp = [repmat(dumax,M,1); -repmat(dumin,M,1); repmat((umax - uk1),M,1); repmat((uk1 - umin),M,1); repmat(ymax,N,1) - f; f - repmat(ymin,N,1)];
+% 
+% fqp = 2*Gn'*(f - r);
+% 
+% 
+% DUk = quadprog(Hqp,fqp,Aqp,bqp);
+% 
+% sys =  DUk; % S-function output (incremento no controle)
+
+%% Incremento no controle
 duk = KMPC*(r - f);
 sys =  duk; % S-function output (incremento no controle)
 
