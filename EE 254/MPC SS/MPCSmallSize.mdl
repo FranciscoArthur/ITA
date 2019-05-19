@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.546"
+    ComputedModelVersion    "1.548"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -103,9 +103,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Pichau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat May 18 20:40:00 2019"
-  RTWModifiedTimeStamp	  480112163
-  ModelVersionFormat	  "1.%<AutoIncrement:546>"
+  LastModifiedDate	  "Sat May 18 21:42:58 2019"
+  RTWModifiedTimeStamp	  480116510
+  ModelVersionFormat	  "1.%<AutoIncrement:548>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1200,7 +1200,6 @@ Model {
       BlockRotation	      270
       BlockMirror	      on
       NamePlacement	      "alternate"
-      Gain		      "0"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1326,7 +1325,7 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Controlador Preditivo MIMO\nempregando realimentação\nde estado"
+      Name		      "Controlador Preditivo MIMO com \nrestrições empregando realimentação\nde estado"
       SID		      "1"
       Ports		      [3, 1]
       Position		      [260, 202, 395, 308]
@@ -1408,7 +1407,7 @@ Model {
 	}
       }
       System {
-	Name			"Controlador Preditivo MIMO\nempregando realimentação\nde estado"
+	Name			"Controlador Preditivo MIMO com \nrestrições empregando realimentação\nde estado"
 	Location		[-8, -8, 2568, 1048]
 	Open			off
 	PortBlocksUseCompactNotation off
@@ -1710,7 +1709,7 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "MATLAB Function"
+      Name		      "Gerador de trajetórias segundo curvas de Lissajous"
       SID		      "98"
       Ports		      [5, 1]
       Position		      [-310, 65, 50, 375]
@@ -1730,7 +1729,7 @@ Model {
 	RunInitForIconRedraw	"on"
       }
       System {
-	Name			"MATLAB Function"
+	Name			"Gerador de trajetórias segundo curvas de Lissajous"
 	Location		[223, 338, 826, 833]
 	Open			off
 	PortBlocksUseCompactNotation off
@@ -2314,7 +2313,7 @@ Model {
     }
     Line {
       ZOrder		      1
-      SrcBlock		      "Controlador Preditivo MIMO\nempregando realimentação\nde estado"
+      SrcBlock		      "Controlador Preditivo MIMO com \nrestrições empregando realimentação\nde estado"
       SrcPort		      1
       Points		      [25, 0]
       Branch {
@@ -2333,7 +2332,7 @@ Model {
       ZOrder		      7
       SrcBlock		      "Mux"
       SrcPort		      1
-      DstBlock		      "Controlador Preditivo MIMO\nempregando realimentação\nde estado"
+      DstBlock		      "Controlador Preditivo MIMO com \nrestrições empregando realimentação\nde estado"
       DstPort		      1
     }
     Line {
@@ -2413,7 +2412,7 @@ Model {
       Branch {
 	ZOrder			42
 	Points			[0, -115]
-	DstBlock		"Controlador Preditivo MIMO\nempregando realimentação\nde estado"
+	DstBlock		"Controlador Preditivo MIMO com \nrestrições empregando realimentação\nde estado"
 	DstPort			3
       }
       Branch {
@@ -2554,7 +2553,7 @@ Model {
       SrcBlock		      "Sum3"
       SrcPort		      1
       Points		      [-691, 0; 0, -125]
-      DstBlock		      "Controlador Preditivo MIMO\nempregando realimentação\nde estado"
+      DstBlock		      "Controlador Preditivo MIMO com \nrestrições empregando realimentação\nde estado"
       DstPort		      2
     }
     Line {
@@ -2573,7 +2572,7 @@ Model {
     }
     Line {
       ZOrder		      98
-      SrcBlock		      "MATLAB Function"
+      SrcBlock		      "Gerador de trajetórias segundo curvas de Lissajous"
       SrcPort		      1
       DstBlock		      "Demux"
       DstPort		      1
@@ -2582,35 +2581,35 @@ Model {
       ZOrder		      102
       SrcBlock		      "Clock"
       SrcPort		      1
-      DstBlock		      "MATLAB Function"
+      DstBlock		      "Gerador de trajetórias segundo curvas de Lissajous"
       DstPort		      5
     }
     Line {
       ZOrder		      103
       SrcBlock		      "A"
       SrcPort		      1
-      DstBlock		      "MATLAB Function"
+      DstBlock		      "Gerador de trajetórias segundo curvas de Lissajous"
       DstPort		      1
     }
     Line {
       ZOrder		      104
       SrcBlock		      "B"
       SrcPort		      1
-      DstBlock		      "MATLAB Function"
+      DstBlock		      "Gerador de trajetórias segundo curvas de Lissajous"
       DstPort		      2
     }
     Line {
       ZOrder		      105
       SrcBlock		      "a"
       SrcPort		      1
-      DstBlock		      "MATLAB Function"
+      DstBlock		      "Gerador de trajetórias segundo curvas de Lissajous"
       DstPort		      3
     }
     Line {
       ZOrder		      106
       SrcBlock		      "b"
       SrcPort		      1
-      DstBlock		      "MATLAB Function"
+      DstBlock		      "Gerador de trajetórias segundo curvas de Lissajous"
       DstPort		      4
     }
     Annotation {
@@ -2656,7 +2655,7 @@ Stateflow {
   chart {
     id			    2
     machine		    1
-    name		    "MATLAB Function"
+    name		    "Gerador de trajetórias segundo curvas de Lissajous"
     windowPosition	    [422 539.941 189 413]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 3600 1200 1.180555555555556]
@@ -2880,7 +2879,7 @@ Stateflow {
   instance {
     id			    12
     machine		    1
-    name		    "MATLAB Function"
+    name		    "Gerador de trajetórias segundo curvas de Lissajous"
     chart		    2
   }
   target {
