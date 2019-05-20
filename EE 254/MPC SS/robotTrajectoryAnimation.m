@@ -69,12 +69,12 @@ for i = 1:length(X)%para ver o movimento da bola
     
     hold off
 
-    %videoFrame(i) = getframe(gcf);
-    pause(0.000000000007)
+    videoFrame(i) = getframe(gcf);
+    %pause(0.000000000007/length(X))
 end
 
-%     video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
-%     video.FrameRate = 20;
-%     open(video);
-%     writeVideo(video,videoFrame);
-%     close(video);
+    video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
+    video.FrameRate = 120;
+    open(video);
+    writeVideo(video,videoFrame);
+    close(video);

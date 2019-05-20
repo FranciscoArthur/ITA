@@ -1,0 +1,642 @@
+%implements s1_b0_qig7g_TLCInterface "C"
+
+%function getInputAddr_1_5_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_5_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_5_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_5_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParam_1_5_0_2_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParam_1_5_0_2_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParam_1_5_0_2_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParam_1_5_0_2_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParam_1_5_0_2_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParam_1_5_0_2_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParam_1_5_0_2_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParamAddr_1_5_0_2_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.T"
+%endfunction
+
+%function getParam_1_5_0_2_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.T"
+%endfunction
+
+%function getInputAddr_1_0_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_0_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_0_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.xamareloyroxophiazul_PWORK"
+%endfunction
+
+%function getDWork_1_0_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.xamareloyroxophiazul_PWORK"
+%endfunction
+
+%function getInputAddr_1_1_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_1_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_1_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.ToWorkspace1_PWORK"
+%endfunction
+
+%function getDWork_1_1_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.ToWorkspace1_PWORK"
+%endfunction
+
+%function getInputAddr_1_6_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.uk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_6_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.uk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_6_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.VemxamareloVnemyroxoWemphiazul_"
+%endfunction
+
+%function getDWork_1_6_0_2_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.VemxamareloVnemyroxoWemphiazul_"
+%endfunction
+
+%function getInputAddr_1_5_0_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_5_0_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_5_0_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_5_0_3_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParam_1_5_0_3_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParam_1_5_0_3_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParam_1_5_0_3_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParam_1_5_0_3_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParam_1_5_0_3_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParam_1_5_0_3_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParam_1_5_0_3_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParamAddr_1_5_0_3_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.T"
+%endfunction
+
+%function getParam_1_5_0_3_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.T"
+%endfunction
+
+%function getInputAddr_1_0_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_0_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_0_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.xamareloyroxophiazul_PWORK"
+%endfunction
+
+%function getDWork_1_0_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.xamareloyroxophiazul_PWORK"
+%endfunction
+
+%function getInputAddr_1_1_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_1_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_1_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.ToWorkspace1_PWORK"
+%endfunction
+
+%function getDWork_1_1_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.ToWorkspace1_PWORK"
+%endfunction
+
+%function getInputAddr_1_5_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_5_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_5_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_5_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParam_1_5_0_4_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParam_1_5_0_4_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParam_1_5_0_4_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParam_1_5_0_4_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParam_1_5_0_4_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParam_1_5_0_4_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParam_1_5_0_4_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParamAddr_1_5_0_4_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.T"
+%endfunction
+
+%function getParam_1_5_0_4_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.T"
+%endfunction
+
+%function getInputAddr_1_6_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.uk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_6_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.uk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_6_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.VemxamareloVnemyroxoWemphiazul_"
+%endfunction
+
+%function getDWork_1_6_0_4_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.VemxamareloVnemyroxoWemphiazul_"
+%endfunction
+
+%function getInputAddr_1_5_0_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_5_0_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_5_0_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_5_0_5_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParam_1_5_0_5_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParam_1_5_0_5_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParam_1_5_0_5_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParam_1_5_0_5_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParam_1_5_0_5_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParam_1_5_0_5_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParam_1_5_0_5_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParamAddr_1_5_0_5_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.T"
+%endfunction
+
+%function getParam_1_5_0_5_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.T"
+%endfunction
+
+%function getInputAddr_1_1_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_1_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.Equacaodesaida" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getDWorkAddr_1_1_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_DW.ToWorkspace1_PWORK"
+%endfunction
+
+%function getDWork_1_1_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_DW.ToWorkspace1_PWORK"
+%endfunction
+
+%function getInputAddr_1_5_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getInput_1_5_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.TmpSignalConversionAtControlado" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutputAddr_1_5_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getOutput_1_5_0_8_0_0(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_B.duk" + SLibCG_ArrayIndexer(ucv, lcv, sigIdx)
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParam_1_5_0_8_1_28(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P1"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParam_1_5_0_8_1_30(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P2"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParam_1_5_0_8_1_32(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P3"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParam_1_5_0_8_1_34(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P4"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParam_1_5_0_8_1_36(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P5"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParam_1_5_0_8_1_38(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P6"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParam_1_5_0_8_1_40(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.Controlador_P7"
+%endfunction
+
+%function getParamAddr_1_5_0_8_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "&MPCSmallSize_P.T"
+%endfunction
+
+%function getParam_1_5_0_8_1_4(opaqueBlock, block, lcv, ucv, sigIdx, reim) void
+
+%return "MPCSmallSize_P.T"
+%endfunction
+

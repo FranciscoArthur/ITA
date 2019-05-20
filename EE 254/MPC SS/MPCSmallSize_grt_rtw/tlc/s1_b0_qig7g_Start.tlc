@@ -1,0 +1,42 @@
+%implements s1_b0_qig7g_Start "C"
+
+%function Start(block, system) Output
+%assign cfgTxt = ""
+%openfile cfgTxt
+%assign localVarDecl = ""
+%assign tlcSetupRuntimeResourcesFcnOfS1B5 = OpaqueTLCBlockFcn("SetupRuntimeResources", 1, 5, 0, 2)
+%assign tlcStartFcnOfS1B0 = OpaqueTLCBlockFcn("Start", 1, 0, 0, 2)
+%assign tlcStartFcnOfS1B1 = OpaqueTLCBlockFcn("Start", 1, 1, 0, 2)
+%assign tlcStartFcnOfS1B5 = OpaqueTLCBlockFcn("Start", 1, 5, 0, 2)
+%assign tlcStartFcnOfS1B6 = OpaqueTLCBlockFcn("Start", 1, 6, 0, 2)
+%if !WHITE_SPACE(tlcSetupRuntimeResourcesFcnOfS1B5)
+/* SetupRuntimeResources for S-Function (mpc_ss_du_mimo): '<S1>/Controlador' */
+%<tlcSetupRuntimeResourcesFcnOfS1B5>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS1B0)
+/* Start for Scope: '<Root>/ x (amarelo)  y (roxo)  phi (azul)' */
+%<tlcStartFcnOfS1B0>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS1B1)
+/* Start for ToWorkspace: '<Root>/To Workspace1' */
+%<tlcStartFcnOfS1B1>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS1B5)
+/* Start for S-Function (mpc_ss_du_mimo): '<S1>/Controlador' */
+%<tlcStartFcnOfS1B5>\
+%endif
+%if !WHITE_SPACE(tlcStartFcnOfS1B6)
+/* Start for Scope: '<Root>/V (em x) (amarelo) Vn (em y) (roxo) W (em phi) (azul)' */
+%<tlcStartFcnOfS1B6>\
+%endif
+%closefile cfgTxt
+%<cfgTxt>
+%endfunction
+%function StartFcnProtoType(block, system) Output
+%assign fcnProtoType = ""
+%openfile fcnProtoType
+static void Start(\
+%assign comma = ""
+%closefile fcnProtoType
+%<SLibCG_SetFcnProtoType(0, 2, fcnProtoType)>
+%endfunction
