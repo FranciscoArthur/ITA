@@ -117,14 +117,14 @@ TetoVoo = @(rhoTeto) 2*W*sqrt(Cd0*k)/cos(phi) - T(1,rhoTeto)
 
 rhoTeto = fsolve(TetoVoo, 0.1);
 
-HtetoAux = 0:5:20000;
+HtetoAux = 12000:.05:15000;
 [~,~,~,rhoTetoAux] = atmosisa(HtetoAux);
 rhoTetoAuxPosic = find(abs(rhoTetoAux - rhoTeto) < 10^-4);
 Hteto = HtetoAux(rhoTetoAuxPosic(1,1))
 clear HtetoAux rhoTetoAux rhoTetoAuxPosic
 
 %% Item 9
-HEnvel = linspace(0,Hteto,100);
+HEnvel = linspace(0,0.9999*Hteto,100);
 [~,~,~,rhoEnvel] = atmosisa(HEnvel);
 rhoEnvel = rhoEnvel';
 
@@ -140,13 +140,17 @@ Vreq(i) = VreqAux(1,1);
 Vreq2(i) = VreqAux(2,1);
 end
 
-HEnvel = [HEnvel HEnvel];
-Vreq = [Vreq' sort(Vreq2','ascend')];
+HEnvel = [ HEnvel HEnvel(sort(1:1:length(HEnvel),'descend'))];
+Vreq = [ (Vreq2)' (Vreq(sort(1:1:length(Vreq),'descend')))' ];
 Vstall = sqrt(2*W./(rhoEnvel*s*CLmax));
 
+
+color = HEnvel;
+
 figure
-area(Vreq,HEnvel)
+patch(Vreq,HEnvel,color)
 hold on
+colorbar
 plot(Vstall, HEnvel(1,1:100),'LineWidth',2)
 xlabel('Velocidade [m/s]')
 ylabel('Altitude da aeronave [m]')

@@ -117,36 +117,36 @@ TetoVoo = @(rhoTeto) 2*W*sqrt(Cd0*k)/cos(phi) - T(1,rhoTeto)
 
 rhoTeto = fsolve(TetoVoo, 0.1);
 
-HtetoAux = 0:5:20000;
+HtetoAux = 12000:.05:15000;
 [~,~,~,rhoTetoAux] = atmosisa(HtetoAux);
 rhoTetoAuxPosic = find(abs(rhoTetoAux - rhoTeto) < 10^-4);
 Hteto = HtetoAux(rhoTetoAuxPosic(1,1))
 clear HtetoAux rhoTetoAux rhoTetoAuxPosic
 
 %% Item 9
-HEnvel = linspace(0,Hteto,100);
+HEnvel = linspace(0,0.9999*Hteto,100);
 [~,~,~,rhoEnvel] = atmosisa(HEnvel);
 rhoEnvel = rhoEnvel';
 
-0.5*rho*s*Cd0 0 (-(rho/1.225)^0.6*Tmax_s) 0 2*k*W^2/(rho*s*cos(phi)^2)
 
-PoliVreq = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1)  ( - P(1,rhoEnvel)) zeros(length(rhoEnvel),1) 2*k*W^2./(rhoEnvel*s*ch)];
+PoliVreq = [0.5*rhoEnvel*s*Cd0, zeros(length(rhoEnvel),1),  (- T(1,rhoEnvel)), zeros(length(rhoEnvel),1), 2*k*W^2./(rhoEnvel*s*cos(phi)^2)];
 
 Vreq = zeros(length(rhoEnvel),1);
 Vreq2 = zeros(length(rhoEnvel),1);
 
 for i = 1:length(rhoEnvel)
-VreqAux = sort(roots(PoliVreq(i,:)));
+VreqAux = sort(roots(PoliVreq(i,:)),'descend');
 Vreq(i) = VreqAux(1,1);
 Vreq2(i) = VreqAux(2,1);
 end
 
-HEnvel = [HEnvel HEnvel];
-Vreq = [Vreq' sort(Vreq2','descend')];
+HEnvel = [ HEnvel HEnvel(sort(1:1:length(HEnvel),'descend'))];
+Vreq = [ (Vreq2)' (Vreq(sort(1:1:length(Vreq),'descend')))' ];
 Vstall = sqrt(2*W./(rhoEnvel*s*CLmax));
 
+color = linspace(0,Vreq,length(HEnvel));
 figure
-area(Vreq,HEnvel)
+patch(Vreq,HEnvel,color)
 hold on
 plot(Vstall, HEnvel(1,1:100),'LineWidth',2)
 xlabel('Velocidade [m/s]')
@@ -155,106 +155,4 @@ title('Envelope de voo da aeronave')
 grid on
 hold off
 
-%% Item 10
-
-HEnvel1 = linspace(0,Hteto,100);
-Vclimb = linspace(1,5,5);
-[~,~,~,rhoEnvel] = atmosisa(HEnvel1);
-rhoEnvel = rhoEnvel';
-
-PoliVreq1 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(1) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
-
-PoliVreq2 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(2) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
-
-PoliVreq3 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(3) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
-
-PoliVreq4 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(4) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
-
-PoliVreq5 = [0.5*rhoEnvel*s*Cd0 zeros(length(rhoEnvel),1) zeros(length(rhoEnvel),1) (W*Vclimb(5) - P(1,eta,rhoEnvel)) 2*k*W^2./(rhoEnvel*s)];
-
-
-
-Vreq1 = zeros(length(rhoEnvel),1);
-Vreq12 = zeros(length(rhoEnvel),1);
-Vreq2 = zeros(length(rhoEnvel),1);
-Vreq22 = zeros(length(rhoEnvel),1);
-Vreq3 = zeros(length(rhoEnvel),1);
-Vreq32 = zeros(length(rhoEnvel),1);
-Vreq4 = zeros(length(rhoEnvel),1);
-Vreq42 = zeros(length(rhoEnvel),1);
-Vreq5 = zeros(length(rhoEnvel),1);
-Vreq52 = zeros(length(rhoEnvel),1);
-
-for i = 1:length(rhoEnvel)
-VreqAux1 = sort(roots(PoliVreq1(i,:)));
-Vreq1(i) = VreqAux1(1,1);
-Vreq12(i) = VreqAux1(2,1);
-
-VreqAux2 = sort(roots(PoliVreq2(i,:)));
-Vreq2(i) = VreqAux2(1,1);
-Vreq22(i) = VreqAux2(2,1);
-
-VreqAux3 = sort(roots(PoliVreq3(i,:)));
-Vreq3(i) = VreqAux3(1,1);
-Vreq32(i) = VreqAux3(2,1);
-
-VreqAux4 = sort(roots(PoliVreq4(i,:)));
-Vreq4(i) = VreqAux4(1,1);
-Vreq42(i) = VreqAux4(2,1);
-
-VreqAux5 = sort(roots(PoliVreq5(i,:)));
-Vreq5(i) = VreqAux5(1,1);
-Vreq52(i) = VreqAux5(2,1);
-end
-
-HEnvel1 = [HEnvel1 HEnvel1];
-Vreq1 = [Vreq1' sort(Vreq12','descend')];
-
-Vreq2 = [Vreq2' sort(Vreq22','descend')];
-
-Vreq3 = [Vreq3' sort(Vreq32','descend')];
-
-Vreq4 = [Vreq4' sort(Vreq42','descend')];
-
-Vreq5 = [Vreq5' sort(Vreq52','descend')];
-
-figure
-h1=area(Vreq1,HEnvel1);
-h1.FaceColor = [0.8 0.8 0];
-hold on
-h2=area(Vreq2,HEnvel1);
-h2.FaceColor = [0.8 0 0.8];
-h3=area(Vreq3,HEnvel1);
-h3.FaceColor = [0.8 0 0];
-h4=area(Vreq4,HEnvel1);
-h4.FaceColor = [0 0 0.8];
-h5=area(Vreq5,HEnvel1);
-h5.FaceColor = [0 0 0];
-plot(Vstall, HEnvel(1,1:100),'LineWidth',2)
-grid on
-hold off
-
-xlabel('Velocidade [m/s]')
-ylabel('Altitude [m]')
-legend('Razão de Subida 1 m/s', 'Razão de Subida 2 m/s', 'Razão de Subida 3 m/s', 'Razão de Subida 4 m/s', 'Razão de Subida 5 m/s')
-title('Envelope de voo da aeronave para várias razões de subida')
-
-%% Item 11
-
-[~,~,~,rhoDisp] = atmosisa(Hteto/2);
-Vel = linspace(1,25);
-VclimbDisp = 0;
-
-Treq = W*VclimbDisp./Vel + 0.5*rhoDisp*Vel.^2*s*Cd0 + 2*k*W^2./(rhoDisp*s*Vel.^2);
-TDisp = P(1,eta,rhoDisp)./Vel;
-
-figure
-plot(Vel,Treq)
-hold on
-plot(Vel,TDisp)
-hold off
-grid on
-xlabel('Velocidade [m/s]');
-ylabel('Tração [N]')
-title('Gráfico da velocidade em função da tração')
-legend('Tração requerida', 'Tração disponível')
+%% Item 7

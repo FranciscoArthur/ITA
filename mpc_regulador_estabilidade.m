@@ -1,24 +1,24 @@
-function [sys,dummy0,str,ts] = mpc_ss_du_mimo_restricoes(t,dummy,inputs,flag,Phi,Gn,Hqp,Aqp,dumax,dumin,umax,umin,ymax,ymin,p,q,n,M,N,T)
+function [sys,dummy0,str,ts] = mpc_regulador_estabilidade(t,dummy,inputs,flag,Phiu,Hn,Hqp,Aqp,Aeq,umax,umin,xmax,xmin,p,n,N,T)
 
 % Input parameters:
-% Phi: Column vector (N x 1) --> [CA;CA^2; ... ; CA^N]
-% Gn: Normalized Dynamic matrix
+% Phiu: Column vector (nN x 1) --> [A;A^2; ... ; A^N]
+% Hn: Normalized Dynamic matrix
 % Hqp,Aqp: H,A matrices for use with the Quadprog function
-% dumax,dumin,umax,umin,ymax,ymin: Constraints
-% M: Control Horizon
+% Aeq: For use in the equality constraint
+% umax,umin,ymax,ymin: Constraints
 % N: Prediction Horizon
 % T: Sampling period
 %
-% Input variables (in this order): yref(k), x(k), u(k-1)
+% Input variables: x(k)
 %
 % Autor: Roberto Kawakami Harrop Galvao
 % ITA - Divisao de Engenharia Eletronica
-% Data: 10 de maio de 2017
+% Data: 23 de maio de 2017
 
 switch flag,
 
 case 0
-[sys,dummy0,str,ts] = mdlInitializeSizes(T,p,q,n); % S-function Initialization
+[sys,dummy0,str,ts] = mdlInitializeSizes(T,p,n); % S-function Initialization
 
 case 2
 sys = mdlUpdate(t);
@@ -28,29 +28,26 @@ sys = []; % Unused Flags
    
 case 3 % Evaluate Function
 
-yref = inputs(1:q); % yref(k)
-xk = inputs(q+1:q+n);  % x(k)
-uk1 = inputs(q+n+1:end); % u(k-1)
-
-xik = [xk;uk1]; % Estado aumentado xi(k)
+xk = inputs;  % x(k)
     
-% Valores futuros de referência
-r = repmat(yref,N,1);
-
 % Resposta livre
-f = Phi*xik;
+fu = Phiu*xk;
    
 % Cálculo do controle ótimo
 
-bqp = [repmat(dumax,M,1); -repmat(dumin,M,1); repmat((umax - uk1),M,1); repmat((uk1 - umin),M,1); repmat(ymax,N,1) - f; f - repmat(ymin,N,1)];
+fqp = 2*Hn'*fu;
 
-fqp = 2*Gn'*(f - r);
+bqp = [repmat(umax,N,1);
+       - repmat(umin,N,1);
+       repmat(xmax,N,1) - fu;
+       fu - repmat(xmin,N,1);];
 
+beq = -fu(end-n+1:end);
+  
 options = optimset('Algorithm','interior-point-convex','Display','final');
-Hqp = (Hqp+Hqp')/2;
-DUk = quadprog(Hqp,fqp,Aqp,bqp,[],[],[],[],[],options);
+Uk = quadprog(Hqp,fqp,Aqp,bqp,Aeq,beq,[],[],[],options);
 
-sys =  DUk(1:p); % Saída da S-function (incremento nos p controles)
+sys =  Uk(1:p); % Saída da S-function
 
 end
 
@@ -61,7 +58,7 @@ end
 % Return the sizes, initial conditions, and sample times for the S-function.
 %=============================================================================
 %
-function [sys,dummy0,str,ts] = mdlInitializeSizes(T,p,q,n)
+function [sys,dummy0,str,ts] = mdlInitializeSizes(T,p,n)
 
 %
 % call simsizes for a sizes structure, fill it in and convert it to a
@@ -72,8 +69,8 @@ sizes = simsizes;
 
 sizes.NumContStates  = 0;
 sizes.NumDiscStates  = 0;
-sizes.NumOutputs     = p; % du(k)
-sizes.NumInputs      = q + n + p; % yref(k), x(k), u(k-1)
+sizes.NumOutputs     = p; % u(k)
+sizes.NumInputs      = n; % x(k)
 sizes.DirFeedthrough = 1; % Yes
 sizes.NumSampleTimes = 1;   % Just one sample time
 
