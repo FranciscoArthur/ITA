@@ -65,16 +65,16 @@ for i = 1:length(X)%para ver o movimento da bola
     patch(2*0.05*a+Xini(1,1)+Xc(1,1),2*0.05*b+Xini(2,1)+Xc(1,2),rgb('blue'));
   
     %% gerando animação
-    %bal movimento+video
+    % movimento+video
     
     hold off
 
-    videoFrame(i) = getframe(gcf);
-    %pause(0.000000000007/length(X))
+    %videoFrame(i) = getframe(gcf);
+    pause(0.000000000007/length(X))
 end
 
-    video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
-    video.FrameRate = 120;
-    open(video);
-    writeVideo(video,videoFrame);
-    close(video);
+    %video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
+    %video.FrameRate = 120;
+    %open(video);
+    %writeVideo(video,videoFrame);
+    %close(video);
