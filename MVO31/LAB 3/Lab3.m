@@ -21,7 +21,7 @@ VmaxOper = 247;% m/s
 
 
 
-%% item 2
+%% item 1
 phi = deg2rad(30);
 [~,~,~,rho] = atmosisa(3000);
 Vel = linspace(40,VmaxOper,1000);
@@ -39,7 +39,7 @@ ylabel('Tração [N]')
 title('Gráfico da Tração requerida numa dada velocidade');
 legend('Tração requerida','Velocidade de estol');
 
-%% item 3
+%% item 2
 % Caso da formula de tração minima
 VtracMin = sqrt((2*W/(rho*s))*sqrt(k/(Cd0*cos(phi)^2)))
 TracMinTeo = 2*W*sqrt(k*Cd0/(cos(phi)^2))
@@ -63,7 +63,7 @@ deflexProfundTracMin = fsolve(@(delta)CM(alfaTracMin,delta),0.5)
 % Posição de manete
 PosicManeteTracMin = fsolve(@(delta) T(delta,rho)-TracMinTeo,10^5)
 
-%% Item 4
+%% Item 3
 poli = [0.5*rho*s*Cd0 0 (-(rho/1.225)^0.6*Tmax_s) 0 2*k*W^2/(rho*s*cos(phi)^2)];
 VMaxMin = sort(roots(poli),'descend');
 Vmin = VMaxMin(2,1);
@@ -85,7 +85,7 @@ alfaVelMax = fsolve(@(alfa) CL(alfa) - CLVelMax,0.5)
 % Deflexão de profundor
 deflexProfundVelMax = fsolve(@(delta)CM(alfaVelMax,delta),0.5)
 
-%% Item 5
+%% Item 4
 
 Vstall = sqrt(2*W/(rho*s*CLmax));
 
@@ -111,7 +111,7 @@ alfaVelMin = fsolve(@(alfa) CL(alfa) - CLVelMin,0.5)
 % Deflexão de profundor
 deflexProfundVelMin = fsolve(@(delta)CM(alfaVelMin,delta),0.5)
 
-%% Item 8
+%% Item 5
 
 TetoVoo = @(rhoTeto) 2*W*sqrt(Cd0*k)/cos(phi) - T(1,rhoTeto)
 
@@ -123,7 +123,7 @@ rhoTetoAuxPosic = find(abs(rhoTetoAux - rhoTeto) < 10^-4);
 Hteto = HtetoAux(rhoTetoAuxPosic(1,1))
 clear HtetoAux rhoTetoAux rhoTetoAuxPosic
 
-%% Item 9
+%% Item 6
 HEnvel = linspace(0,0.9999*Hteto,100);
 [~,~,~,rhoEnvel] = atmosisa(HEnvel);
 rhoEnvel = rhoEnvel';
