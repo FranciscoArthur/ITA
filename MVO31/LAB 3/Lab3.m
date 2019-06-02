@@ -1,3 +1,13 @@
+%% Lab 3 de MVO 31 - Voo Horizontal em Curva
+% Código para solução das equações do Laboratório 3 de MVO-31.
+% No fim do código ha algumas linhas de código comentadas que geram a 
+% versão publicada do código, para facilitar a correção.
+% Para isso, basta copiar os comandos comentados na Command Window e
+% apertar enter.
+%                                   Autor: Francisco Arthur Bonfim Azevedo
+
+
+%% Parametros da Aeronave
 W =  33100*9.81;% kg
 s = 88;% m2
 Tmax_s = 55600; %N
@@ -15,11 +25,8 @@ CM =@(alfa,delta_profund) 0.24 - 0.18*alfa + 0.28*delta_profund;
 nmax = 2;
 
 VmaxOper = 247;% m/s
-% 
-% Vclimb = 5;%m/s
-% eta = 0.8;
 
-
+options = optimoptions('fsolve','Display','none');
 
 %% item 1
 phi = deg2rad(30);
@@ -54,14 +61,14 @@ OmegaTracMin = VtracMin/RtracMin
 Period = 2*pi/OmegaTracMin
 
 % angulo de ataque
-CLTracMin = W/(0.5*rho*VtracMin^2*s);
-alfaTracMin = fsolve(@(alfa) CL(alfa) - CLTracMin,0.5)
+CLTracMin = W/(0.5*rho*VtracMin^2*s*cos(phi));
+alfaTracMin = fsolve(@(alfa) CL(alfa) - CLTracMin,0.5,options)
 
 % Deflexão de profundor
-deflexProfundTracMin = fsolve(@(delta)CM(alfaTracMin,delta),0.5)
+deflexProfundTracMin = fsolve(@(delta) CM(alfaTracMin,delta),0.5,options)
 
 % Posição de manete
-PosicManeteTracMin = fsolve(@(delta) T(delta,rho)-TracMinTeo,10^5)
+PosicManeteTracMin = fsolve(@(delta) T(delta,rho)-TracMinTeo,10^5,options)
 
 %% Item 3
 poli = [0.5*rho*s*Cd0 0 (-(rho/1.225)^0.6*Tmax_s) 0 2*k*W^2/(rho*s*cos(phi)^2)];
@@ -79,11 +86,11 @@ OmegaVmax = Vmax/Rvmax
 PeriodVmax = 2*pi/OmegaVmax
 
 % angulo de ataque
-CLVelMax = W/(0.5*rho*Vmax^2*s);
-alfaVelMax = fsolve(@(alfa) CL(alfa) - CLVelMax,0.5)
+CLVelMax = W/(0.5*rho*Vmax^2*s*cos(phi));
+alfaVelMax = fsolve(@(alfa) CL(alfa) - CLVelMax,0.5,options)
 
 % Deflexão de profundor
-deflexProfundVelMax = fsolve(@(delta)CM(alfaVelMax,delta),0.5)
+deflexProfundVelMax = fsolve(@(delta)CM(alfaVelMax,delta),0.5,options)
 
 %% Item 4
 
@@ -105,17 +112,17 @@ OmegaVmin = Vmin/Rvmin
 PeriodVmin = 2*pi/OmegaVmin
 
 % angulo de ataque
-CLVelMin = W/(0.5*rho*Vmin^2*s);
-alfaVelMin = fsolve(@(alfa) CL(alfa) - CLVelMin,0.5)
+CLVelMin = W/(0.5*rho*Vmin^2*s*cos(phi));
+alfaVelMin = fsolve(@(alfa) CL(alfa) - CLVelMin,0.5,options)
 
 % Deflexão de profundor
-deflexProfundVelMin = fsolve(@(delta)CM(alfaVelMin,delta),0.5)
+deflexProfundVelMin = fsolve(@(delta)CM(alfaVelMin,delta),0.5,options)
 
 %% Item 5
 
-TetoVoo = @(rhoTeto) 2*W*sqrt(Cd0*k)/cos(phi) - T(1,rhoTeto)
+TetoVoo = @(rhoTeto) 2*W*sqrt(Cd0*k)/cos(phi) - T(1,rhoTeto);
 
-rhoTeto = fsolve(TetoVoo, 0.1);
+rhoTeto = fsolve(TetoVoo, 0.1,options);
 
 HtetoAux = 12000:.05:15000;
 [~,~,~,rhoTetoAux] = atmosisa(HtetoAux);
@@ -159,3 +166,56 @@ grid on
 hold off
 
 %% Item 7
+
+Vel = linspace(0,VmaxOper,1000);
+
+
+[~,~,~,rho] = atmosisa(3000);
+
+%limite do cosseno:
+cosMax = 1*ones(1,length(Vel));
+
+%limite de velocidade:
+Vstall = sqrt(2*W/(rho*s*CLmax))*ones(1,length(Vel));
+
+%limite estrutural: 
+cosPhiMaxEstrutural = (1/nmax)*ones(1,length(Vel));
+
+%limite aerodinâmico:
+cosPhiMaxAerodinamico = 2*W./(rho.*Vel.^2*s*CLmax).*(2*W./(rho.*Vel.^2*s*CLmax)<1); %a desigualdade limita a valor do cosseno entre 0 e 1
+
+%limite propulsivo:
+cosPhiMaxPropulsivo = (2*k*W^2./(2*Vel.^2*s))./(-0.5*rho.*Vel.^2*s*Cd0 + T(1,rho)).*((2*k*W^2./(2*Vel.^2*s))./(-0.5*rho.*Vel.^2*s*Cd0 + T(1,rho))<1); %a desigualdade limita a valor do cosseno entre 0 e 1
+
+m1 = min(find(cosPhiMaxEstrutural>0)); %Remove os zeros que existem repetidos no vetor
+
+m2 = min(find(cosPhiMaxAerodinamico>0));
+
+m3 = min(find(cosPhiMaxPropulsivo>0));
+
+figure
+plot(Vel,cosMax,'--r')
+hold on
+grid on
+plot(Vel(1,m1:end),cosPhiMaxEstrutural(1,m1:end))
+plot(Vel(1,m2:end),cosPhiMaxAerodinamico(1,m2:end))
+plot(Vel(1,m3:end),cosPhiMaxPropulsivo(1,m3:end))
+plot(Vstall,linspace(0,1,length(Vstall)),'--k')
+text(76.15,0.5,'\leftarrow Ponto de raio minimo')
+plot(76.15,0.5,'or')
+text(150,0.7,'Região permitida')
+hold off
+ylim([0 1.1])
+xlabel('Velocidade [m/s]')
+ylabel('cos(\phi)')
+title('Gráfico da Tração requerida numa dada velocidade');
+legend('Limite do cosseno','Limite estrutural', 'Limite aerodinâmico', 'Limite propulsivo','Velocidade de estol');
+
+
+VRaioMin = 76.15;
+phiRaioMin = acos(0.5);
+Rmin = VRaioMin^2/(9.81*tan(phiRaioMin))
+
+%% Gera a versão html do código
+%     publish('Lab3.m');
+%     web('html/Lab3.html');
