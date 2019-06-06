@@ -34,7 +34,7 @@ Model {
   FPTRunName		  "Run 1"
   MaxMDLFileLineLength	  120
   InitFcn		  "parametrosSmallSize"
-  PauseFcn		  ">> robotTrajectoryAnimation(xref,yref,X(:,1),X(:,2),X(:,3)"
+  StopFcn		  "robotTrajectoryAnimation(xref,yref,X(:,1),X(:,2),X(:,3))"
   LastSavedArchitecture	  "win64"
   Object {
     $PropName		    "BdWindowsInfo"
@@ -70,8 +70,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1020.0, 563.0]
-	ZoomFactor		[0.74272119835208739]
-	Offset			[-398.84960336538461, -92.011667668269183]
+	ZoomFactor		[0.56675340674251584]
+	Offset			[-404.70210118447585, -209.68867738785286]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -105,8 +105,8 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "arthu"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu May 23 12:10:56 2019"
-  RTWModifiedTimeStamp	  480514215
+  LastModifiedDate	  "Tue Jun 04 09:00:19 2019"
+  RTWModifiedTimeStamp	  480514728
   ModelVersionFormat	  "1.%<AutoIncrement:549>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
@@ -1150,7 +1150,7 @@ Model {
   System {
     Name		    "MPCSmallSize"
     Location		    [-8, -8, 1374, 736]
-    Open		    on
+    Open		    off
     PortBlocksUseCompactNotation off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1162,7 +1162,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "74"
+    ZoomFactor		    "57"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "111"
     Block {
@@ -1256,7 +1256,6 @@ Model {
       ZOrder		      21
       BlockMirror	      on
       NamePlacement	      "alternate"
-      Gain		      "0"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -1276,23 +1275,23 @@ Model {
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1','DataLoggingSaveFormat','Array','DataLogging"
       "Decimation','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDis"
-      "plays',{struct('MinYLimReal','-1.00000','MaxYLimReal','1.00000','YLabelReal','','MinYLimMag','0.00000','MaxYLimM"
-      "ag','1.00000','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTi"
-      "ckColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.07450980"
-      "39215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.07450980"
-      "39215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'T"
-      "itle','%<SignalLabel>','LinePropertiesCache',{{[],struct('Color',[0.749019607843137 0 0.749019607843137],'LineSt"
-      "yle','-','LineWidth',0.75,'Marker','none','Visible','on'),struct('Color',[0 1 1],'LineStyle','-','LineWidth',0.7"
-      "5,'Marker','none','Visible','on')}},'UserDefinedChannelNames',{{'x','y','phi'}},'NumLines',3,'LineNames',{{'x','"
-      "y','phi'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-1.00000','MaxYLim"
-      "Real','1.00000','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','1.00000','LegendVisibility','On','XGrid',tr"
-      "ue,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0."
-      "686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353"
-      " 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0"
-      ".0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>'),'TimeRangeSamples','10',"
-      "'TimeRangeFrames','10'),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousAutoscal"
-      "e','XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2017a')),'Version','2017a','Location',[483 "
-      "421 973 787])"
+      "plays',{struct('MinYLimReal','-5.5604','MaxYLimReal','2.47115','YLabelReal','','MinYLimMag','0.00000','MaxYLimMa"
+      "g','5.5604','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTick"
+      "Color',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039"
+      "215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039"
+      "215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Tit"
+      "le','%<SignalLabel>','LinePropertiesCache',{{[],struct('Color',[0.749019607843137 0 0.749019607843137],'LineStyl"
+      "e','-','LineWidth',0.75,'Marker','none','Visible','on'),struct('Color',[0 1 1],'LineStyle','-','LineWidth',0.75,"
+      "'Marker','none','Visible','on')}},'UserDefinedChannelNames',{{'x','y','phi'}},'NumLines',3,'LineNames',{{'x','y'"
+      ",'phi'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLimReal','-5.5604','MaxYLimRea"
+      "l','2.47115','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','5.5604','LegendVisibility','On','XGrid',true,'"
+      "YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.6862"
+      "74509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.1"
+      "6078431372549;0.392156862745098 0.831372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.058"
+      "8235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%<SignalLabel>'),'TimeRangeSamples','10','Tim"
+      "eRangeFrames','10'),extmgr.Configuration('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousAutoscale','"
+      "XY'),extmgr.Configuration('Tools','Measurements',true,'Version','2017a')),'Version','2017a','Location',[354 183 "
+      "844 549])"
       NumInputPorts	      "1"
     }
     Block {
@@ -2050,7 +2049,7 @@ Model {
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
-      Variance		      "0.001"
+      Variance		      "0.01"
       SampleTime	      "0.1"
     }
     Block {
