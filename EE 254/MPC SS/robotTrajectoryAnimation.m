@@ -23,12 +23,31 @@ X = [x,y];
 limx = max(X(:,1))*1.2;
 limy = max(X(:,2))*1.2;
 
+aceleracao = 7;%acelerado em 10x
+j = 1;
+for i = 1:aceleracao:length(x)
+    xRedu(j,1) = x(i);
+    j = j+1;
+end
 
+j=1;
+for i = 1:aceleracao:length(y)
+    yRedu(j,1) = y(i);
+    j = j+1;
+end
+
+j=1;
+for i = 1:aceleracao:length(theta)
+    thetaRedu(j,1) = theta(i);
+    j = j+1;
+end
+
+X = [xRedu,yRedu];
 
 for i = 1:length(X)%para ver o movimento da bola
     
     Xc = X(i,:);
-    thetai = theta(i);
+    thetai = thetaRedu(i);
     
     plot(X(:,1),X(:,2),'--r')% trajetória do controle
     hold on
@@ -69,12 +88,12 @@ for i = 1:length(X)%para ver o movimento da bola
     
     hold off
 
-    %videoFrame(i) = getframe(gcf);
-    pause(0.000000000007/length(X))
+    videoFrame(i) = getframe(gcf);
+    %pause(0.000000000007/length(X))
 end
 
-    %video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
-    %video.FrameRate = 120;
-    %open(video);
-    %writeVideo(video,videoFrame);
-    %close(video);
+    video = VideoWriter('SimulSSLissajousTrajectory','MPEG-4');
+    video.FrameRate = 120;
+    open(video);
+    writeVideo(video,videoFrame);
+    close(video);

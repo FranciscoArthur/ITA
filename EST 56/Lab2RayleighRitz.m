@@ -18,8 +18,8 @@ L = 1; %(m) comprimento da viga
 
 k = 1000; % discretização numérica
 
-m = [0.0439];% 0.0457]; %(kg) massas pontuais colocadas na viga
-x_m = [L];% L-0.25]; %(m) posição respectiva de cada massa na viga
+m = [0.0439 0.0457]; %(kg) massas pontuais colocadas na viga
+x_m = [L L-0.25]; %(m) posição respectiva de cada massa na viga
 
 if length(m) ~= length(x_m)
     error('A quantidade de pontos de massa é diferente da quantidade de posições, checar os vetores m e x_m'); % evitar inconsistencias do tipo m ter mais elementos que x_m e virce-versa 

@@ -44,7 +44,7 @@ bqp = [repmat(umax,N,1);
 
 beq = -fu(end-n+1:end);
   
-options = optimset('Algorithm','active-set','Display','final');
+options = optimset('Display','final');
 Uk = quadprog(Hqp,fqp,Aqp,bqp,Aeq,beq,[],[],[],options);
 
 sys =  Uk(1:p); % Saída da S-function
