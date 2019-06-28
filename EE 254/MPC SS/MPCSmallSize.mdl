@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.550"
+    ComputedModelVersion    "1.551"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -105,9 +105,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Pichau"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Jun 19 04:04:08 2019"
-  RTWModifiedTimeStamp	  482815391
-  ModelVersionFormat	  "1.%<AutoIncrement:550>"
+  LastModifiedDate	  "Wed Jun 26 10:12:55 2019"
+  RTWModifiedTimeStamp	  483337108
+  ModelVersionFormat	  "1.%<AutoIncrement:551>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1164,7 +1164,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "125"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "111"
+    SIDHighWatermark	    "112"
     Block {
       BlockType		      Gain
       Name		      " "
@@ -1353,28 +1353,28 @@ Model {
 	    Type		    "edit"
 	    Name		    "rho"
 	    Prompt		    "Pesos dos controles R (p x 1)"
-	    Value		    "[0.5;0.5;0.5]"
+	    Value		    "[0.05;0.05;0.05]"
 	  }
 	  Object {
 	    $ObjectID		    23
 	    Type		    "edit"
 	    Name		    "mu"
 	    Prompt		    "Pesos das saídas Q (q x 1)"
-	    Value		    "[15;15;15]"
+	    Value		    "[15;20;40]"
 	  }
 	  Object {
 	    $ObjectID		    24
 	    Type		    "edit"
 	    Name		    "N"
 	    Prompt		    "Horizonte de Predição (N)"
-	    Value		    "20"
+	    Value		    "15"
 	  }
 	  Object {
 	    $ObjectID		    25
 	    Type		    "edit"
 	    Name		    "M"
 	    Prompt		    "Horizonte de Controle (M)"
-	    Value		    "15"
+	    Value		    "20"
 	  }
 	  Object {
 	    $ObjectID		    26
@@ -1388,7 +1388,7 @@ Model {
 	    Type		    "edit"
 	    Name		    "ulim"
 	    Prompt		    "[umin,umax] (px2)"
-	    Value		    "[-15 15;-15 15; -15 15]"
+	    Value		    "[-3.5 3.5;-3.5 3.5; -50 50]"
 	  }
 	  Object {
 	    $ObjectID		    28
@@ -2127,6 +2127,20 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace2"
+      SID		      "112"
+      Ports		      [1]
+      Position		      [975, -25, 1035, 5]
+      ZOrder		      35
+      VariableName	      "u"
+      MaxDataPoints	      "inf"
+      SaveFormat	      "Structure With Time"
+      Save2DSignal	      "2-D array (concatenate along first dimension)"
+      FixptAsFi		      on
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      Scope
       Name		      "V (em x) (amarelo)\nVn (em y) (roxo)\nW (em phi) (azul)"
       SID		      "40"
@@ -2141,24 +2155,24 @@ Model {
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
       "ources','WiredSimulink',true,'DataLoggingVariableName','y1','DataLoggingSaveFormat','Array','DataLoggingDecimati"
       "on','1','DataLoggingDecimateData',true),extmgr.Configuration('Visuals','Time Domain',true,'SerializedDisplays',{"
-      "struct('MinYLimReal','-90.20117','MaxYLimReal','20.50077','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','9"
-      "0.20117','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickCol"
-      "or',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215"
-      "686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215"
-      "686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title'"
-      ",'%<SignalLabel>','LinePropertiesCache',{{[],struct('Color',[0.749019607843137 0 0.749019607843137],'LineStyle',"
-      "'-','LineWidth',0.75,'Marker','none','Visible','on'),struct('Color',[0 1 1],'LineStyle','-','LineWidth',0.75,'Ma"
-      "rker','none','Visible','on')}},'UserDefinedChannelNames',{{'Velocidade X','Velocidade Y','W rotação em phi'}},'N"
-      "umLines',3,'LineNames',{{'Velocidade X','Velocidade Y','W rotação em phi'}},'ShowContent',true,'Placement',1)},'"
-      "DisplayPropertyDefaults',struct('MinYLimReal','-90.20117','MaxYLimReal','20.50077','YLabelReal','','MinYLimMag',"
-      "'0.00000','MaxYLimMag','90.20117','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesCo"
-      "lor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666"
-      "666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372"
-      "549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0"
-      ".650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',"
-      "0,'LineNames',{{[]}},'ShowContent',true,'Placement',1),'TimeRangeSamples','10','TimeRangeFrames','10'),extmgr.Co"
-      "nfiguration('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousAutoscale','XY'),extmgr.Configuration('To"
-      "ols','Measurements',true,'Version','2017a')),'Version','2017a','Location',[1 76 1367 727])"
+      "struct('MinYLimReal','-9.69646','MaxYLimReal','7.37774','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','9.6"
+      "9646','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor'"
+      ",[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666667;0.0745098039215686"
+      " 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019608 0.0745098039215686"
+      ";0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863],'Title','%"
+      "<SignalLabel>','LinePropertiesCache',{{[],struct('Color',[0.749019607843137 0 0.749019607843137],'LineStyle','-'"
+      ",'LineWidth',0.75,'Marker','none','Visible','on'),struct('Color',[0 1 1],'LineStyle','-','LineWidth',0.75,'Marke"
+      "r','none','Visible','on')}},'UserDefinedChannelNames',{{'Velocidade X','Velocidade Y','W rotação em phi'}},'NumL"
+      "ines',3,'LineNames',{{'Velocidade X','Velocidade Y','W rotação em phi'}},'ShowContent',true,'Placement',1)},'Dis"
+      "playPropertyDefaults',struct('MinYLimReal','-9.69646','MaxYLimReal','7.37774','YLabelReal','','MinYLimMag','0.00"
+      "000','MaxYLimMag','9.69646','LegendVisibility','On','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',["
+      "0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.0666666666666"
+      "667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.831372549019"
+      "608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215686 0.65098"
+      "0392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLines',0,'Lin"
+      "eNames',{{[]}},'ShowContent',true,'Placement',1),'TimeRangeSamples','10','TimeRangeFrames','10'),extmgr.Configur"
+      "ation('Tools','Plot Navigation',true,'OnceAtStop',false,'PreviousAutoscale','XY'),extmgr.Configuration('Tools','"
+      "Measurements',true,'Version','2017a')),'Version','2017a','Location',[1 76 1367 727])"
       NumInputPorts	      "1"
     }
     Block {
@@ -2223,7 +2237,6 @@ Model {
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
-      Value		      "2"
     }
     Block {
       BlockType		      Constant
@@ -2235,7 +2248,7 @@ Model {
       FontName		      "Arial"
       FontSize		      14
       FontWeight	      "bold"
-      Value		      "3"
+      Value		      "2"
     }
     Block {
       BlockType		      SubSystem
@@ -2324,9 +2337,18 @@ Model {
       }
       Branch {
 	ZOrder			150
-	Points			[0, -225]
-	DstBlock		"V (em x) (amarelo)\nVn (em y) (roxo)\nW (em phi) (azul)"
-	DstPort			1
+	Points			[0, -225; 532, 0]
+	Branch {
+	  ZOrder		  200
+	  Points		  [0, -40]
+	  DstBlock		  "To Workspace2"
+	  DstPort		  1
+	}
+	Branch {
+	  ZOrder		  199
+	  DstBlock		  "V (em x) (amarelo)\nVn (em y) (roxo)\nW (em phi) (azul)"
+	  DstPort		  1
+	}
       }
     }
     Line {
@@ -2626,9 +2648,8 @@ Model {
     }
     Annotation {
       SID		      "49"
-      Name		      "Deve-se executar inicialmente o script parametros_747.m\n\nNa inicialização:\n- A máscara do contro"
-      "lado utiliza a função matrizes_ss_du_mimo.m"
-      Position		      [329, 492, 750, 558]
+      Name		      "\nNa inicialização:\n- A máscara do controlado utiliza a função SSmatrizes_ss_du_mimo.m"
+      Position		      [320, 500, 759, 550]
       InternalMargins	      [0, 0, 0, 0]
       FixedHeight	      off
       FixedWidth	      off
@@ -2662,9 +2683,6 @@ Stateflow {
     screen		    [1 1 3600 1200 1.180555555555556]
     treeNode		    [0 3 0 0]
     viewObj		    2
-    visible		    1
-    subviewS {
-    }
     ssIdHighWaterMark	    9
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
