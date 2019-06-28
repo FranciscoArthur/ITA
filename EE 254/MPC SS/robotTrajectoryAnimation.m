@@ -65,7 +65,7 @@ for i = 1:length(X)%para ver o movimento da bola
     title('Trajetória do robô sobre o campo','FontSize',14)
     set(gca, 'FontSize',14)
     grid minor
-    plot(a,b,'k','Linewidth',0.5) %centro
+    plot(a,b,'k','Linewidth',0.2) %centro
     plot([6 6 -6 -6 6],[9 -9 -9 9 9],'k','LineWidth',0.5) %limites do campo
 
     %gol
