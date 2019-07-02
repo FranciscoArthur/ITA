@@ -10,24 +10,26 @@ clear all
 close all
 
 % Intervalos de interesse
-Vt = 90:2.5:140;
-Tq = 1800*[120 100 20 13 5 0.0001]/100;
+Vt = 140:2.5:280;
+Tq = 1800*[32.4 32.4 36.9 40 48.4 55.9 81.8]/100;
 
 % demais condições:
-Np = 1300*100/100;
-H = 0; % ft (nível do mar)
-Ta = 15+10+273.15; % ISA + 10, K
+Np = 1300*85/100;
+H = 10100; % ft (nível do mar)
+
+Ta = [10 11 11 11.8 12.6 13.6 14.2]+273.15; % ISA + 10, K
 
 for i=1:numel(Tq)
     for j=1:numel(Vt)
-        thrust_N(i,j) = tracao_v2(Vt(j), H, Np, Tq(i), Ta)*4.45;
+        thrust_N(i,j) = tracao_v2(Vt(j), H, Np, Tq(i), Ta(i))*4.45;
     end
 %     plot(Vt,thrust_N(i,:));
 end
+
 
 figure; 
 plot(Vt,thrust_N/4.45,'Linewidth',1); grid on; hold on; 
 xlabel('Airspeed (KTAS)'); 
 ylabel('Thrust (N)');
-legend('Tq=120%','100%','20%','13%','5%','0%');
+legend('Tq=32.4%','32.4%','36.9%','40%','45.4%','55.9%','81.8%');
 
