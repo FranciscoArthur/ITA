@@ -11,6 +11,8 @@ rho=1.225;      %air density
 xf=0.48*c;      % position of flexural axis from nose
 Mthetadot=-1.2;   % unsteady damping term
 e=xf/c - 0.25;  % eccentricity between flexural axis and aero centre (1/4 chord)
+a = 2*e-1/2;
+b = c/2;
 
 %Mass
 M = (m*c^2 - 2*m*c*xcm)/(2*xcm);   % leading edge mass term to allow mass axis to move
@@ -32,7 +34,7 @@ rst2=zeros(2,400);
 vel=zeros(2,400);
 aw = 2*pi;
 
-for kk=400:-1:20
+for kk=400:-1:10
     
 rk=kk*0.01;
 
@@ -40,9 +42,19 @@ rk=kk*0.01;
 % Theodorsen Function Calculation APROXIMADA
 C=0.5+0.0075/(i*rk+0.0455)+0.10055/(i*rk+0.3);
 
+A_m = [-pi*rho*b^2*s^3/3                 pi*rho*b^3*a*s^2/2
+       pi*rho*b^3*a*s^2/2               -pi*rho*b^4*(1/8+a^2)*s];
+B_m = [-2*pi*rho*b*C*s^3/3               -pi*rho*b^2*s^2/2-2*pi*rho*b*C*b*(0.5-a)*s^2/2
+       2*pi*rho*b^2*(0.5+a)*C*s^2/2     -pi*rho*b^3*(0.5-a)*s+2*pi*rho*b^2*C*(0.5+a)*b*(0.5-a)*s];
+C_m = [0                                -2*pi*rho*b*C*s^2/2
+       0                                2*pi*rho*b^2*(0.5+a)*C*s];
+   
+aero = (-A_m+(rk/b)^-1*i*B_m+(rk/b)^-2*C_m);
 
-aero=[ i*rho*c^2*s^3*aw/(6*rk)            aw*rho*s^2*c^3/(4*rk^2)
-       i*rho*c^3*s^3*e*aw/(4*rk)     i*rho*c^4*s^2*Mthetadot/(8*rk)+0.5*rho*c^4*s^2*e*aw/(2*rk^2)];
+%    aero=[ i*rho*c^2*s^3*aw/(6*rk)            aw*rho*s^2*c^3/(4*rk^2)
+%        i*rho*c^3*s^3*e*aw/(4*rk)     i*rho*c^4*s^2*Mthetadot/(8*rk)+0.5*rho*c^4*s^2*e*aw/(2*rk^2)];
+
+   
 %SOLUÇÃO DO PROBLEMA DE AUTOVALOR
 ddd=eig(inv(ks)*(aero+ms)); 
 rrr=real(ddd); 
