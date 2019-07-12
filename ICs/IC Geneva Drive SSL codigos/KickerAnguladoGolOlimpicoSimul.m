@@ -1,13 +1,26 @@
 %clear all
 
-Vchute = 8; %Velocidade inicial do chute
-Wdribbler = 10000*2*pi/60; %rad/s %Velocidade que o dribbler gira a bola;
-thetaGeneva = 15*pi/180; %Angulo de inclinação do chute (kicker angular)
-thetaRot = 50*pi/180; %Ângulo de inclinação do robo
+thetaGeneva = 15*pi/180; %Ângulo de inclinação do robo
 Xini = [0;0]; %posição inicial da bola
 Xobjective = [3;0]; %posição que se deseja atingir com a bola
 r = 0.043; %m %Raio da bola
 
+%% Sem Rede Neural
+
+% Vchute = 8; %Velocidade inicial do chute
+% Wdribbler = 10000*2*pi/60; %rad/s %Velocidade que o dribbler gira a bola;
+% thetaRot = 50*pi/180; %Ângulo de inclinação do robo
+
+%% Rede Neural
+
+if exist('NetChuteAngulado','var') == 0
+    NetChuteAngulado = TreinaSNNChuteCurvo();
+end
+
+% Outputs = net(Inputs), com Outputs = [Vchute, Wdribbler, thetaGeneva] e
+% Inputs = [Xobjetivo], com Xobtjetivo = [x_objetivo; y_objetivo]
+
+[Vchute, Wdribbler, thetaRot] = NetChuteAngulado([3,0]);
 
 X = kickerAngSolver(Vchute,Wdribbler,thetaGeneva,thetaRot,Xini,Xobjective);
 X1 = X(1,:);
