@@ -1,8 +1,8 @@
 %clear all
 
 thetaGeneva = 15*pi/180; %Ângulo de inclinação do robo
-Xini = [0;0]; %posição inicial da bola
-Xobjective = [3;0]; %posição que se deseja atingir com a bola
+Xini = [-1;1]; %posição inicial da bola
+Xobjective = [3;-2]; %posição que se deseja atingir com a bola
 r = 0.043; %m %Raio da bola
 
 %% Sem Rede Neural
@@ -20,12 +20,30 @@ end
 % Outputs = net(Inputs), com Outputs = [Vchute, Wdribbler, thetaGeneva] e
 % Inputs = [Xobjetivo], com Xobtjetivo = [x_objetivo; y_objetivo]
 
-Outputs = NetChuteAngulado(3);
+% Reposicionando o robô
+
+%translação
+posTranslat =@(x) [x(1,1) - Xini(1,1);x(2,1) - Xini(2,1)]; 
+
+Xobj_transl = posTranslat(Xobjective);
+
+%rotação
+M =@(thet) [cos(thet) sin(thet); -sin(thet) cos(thet)];
+
+thet = atan(Xobj_transl(2,1)/Xobj_transl(1,1));
+
+% robô reposicionado no (0,0), chutando na linha do gol (y = 0)
+Xobj_transl_rot = abs(M(thet)*Xobj_transl);
+
+
+Outputs = NetChuteAngulado(Xobj_transl_rot(1,1));
 
 Vchute = Outputs(1,1);
 Wdribbler = Outputs(2,1);
 thetaRot = Outputs(3,1);
  
+%%
+
 X = kickerAngSolver(Vchute,Wdribbler,thetaGeneva,thetaRot,Xini,Xobjective);
 X1 = X(1,:);
 X2 = X(2,:);
@@ -109,6 +127,10 @@ while 1
 %         patch(0.085*as+3.5,0.085*bs+1,'k')
 %         patch(0.05*a+3.5,0.05*b+1,rgb('yellow'));
         
+        % ponto que mirou
+        plot(Xobjective(1,1)*ones(1,100) + linspace(-0.25,0.25),Xobjective(2,1)*ones(1,100),'--r');
+        plot(Xobjective(1,1)*ones(1,100),Xobjective(2,1)*ones(1,100)+ linspace(-0.25,0.25),'--r');
+        plot(Xobjective(1,1),Xobjective(2,1),'ob')
         %% gerando animação
         %bal movimento+video
         
