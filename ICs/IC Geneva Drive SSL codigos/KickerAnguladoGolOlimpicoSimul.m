@@ -1,8 +1,8 @@
 %clear all
 
 thetaGeneva = 15*pi/180; %Ângulo de inclinação do robo
-Xini = [-1;1]; %posição inicial da bola
-Xobjective = [3;-2]; %posição que se deseja atingir com a bola
+Xini = [0;0]; %posição inicial da bola
+Xobjective = [3;0]; %posição que se deseja atingir com a bola
 r = 0.043; %m %Raio da bola
 
 %% Sem Rede Neural
