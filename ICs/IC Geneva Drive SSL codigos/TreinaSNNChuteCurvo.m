@@ -24,8 +24,8 @@ VchuteCasos = (VchuteF - Vchute0)/VchutePasso+1;
 %Número de casos testes de Wdribbler 
 
 Wdribbler0 = 0;
-WdribblerF = 10000;
-WdribblerPasso = 500;
+WdribblerF = 10000*2*pi/60;
+WdribblerPasso = 500*2*pi/60;
 WdribblerCasos = (WdribblerF - Wdribbler0)/WdribblerPasso+1;
 
 %Número de casos testes de thetaRot 
