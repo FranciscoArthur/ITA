@@ -25,14 +25,14 @@ VchuteCasos = round((VchuteF - Vchute0)/VchutePasso)+1;
 
 Wdribbler0 = 0;
 WdribblerF = 12000*2*pi/60;
-WdribblerPasso = 5*2*pi/60;
+WdribblerPasso = 500*2*pi/60;
 WdribblerCasos = round((WdribblerF - Wdribbler0)/WdribblerPasso)+1;
 
 %Número de casos testes de thetaRot 
 
 thetaRot0 = 0;
 thetaRotF = 90*pi/180;
-thetaRotPasso = 2*pi/180;
+thetaRotPasso = 1*pi/180;
 thetaRotCasos = round((thetaRotF - thetaRot0)/thetaRotPasso)+1;
 
 %Número de casos testes de thetaGeneva, São 2 casos por padrão 
@@ -52,7 +52,7 @@ for Vchute = Vchute0:VchutePasso:VchuteF
         %for thetaGeneva = 10*pi/180:10*pi/180:20*pi/180
             for thetaRot = thetaRot0:thetaRotPasso:thetaRotF
                 
-                X = kickerAngSolver(Vchute,Wdribbler,deg2rad(15),thetaRot,[0;0],[3;0]);
+                X = kickerAngSolver(Vchute,Wdribbler,deg2rad(15),thetaRot,[0;0],[5;0]);
 
                 k = find(X(2,:) < 0);
                 
@@ -89,7 +89,7 @@ TargetTrainSNN = (TreinaPosicGeneva(:,1:1:end-1))';
 
 % Define a SNN
 
-net = feedforwardnet(10);
+net = feedforwardnet(30);
 net = configure(net,InputTrainSNN,TargetTrainSNN);
 
 % Treina a SNN
