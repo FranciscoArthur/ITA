@@ -20,8 +20,12 @@ end
 % Outputs = net(Inputs), com Outputs = [Vchute, Wdribbler, thetaGeneva] e
 % Inputs = [Xobjetivo], com Xobtjetivo = [x_objetivo; y_objetivo]
 
-[Vchute, Wdribbler, thetaRot] = NetChuteAngulado([3,0]);
+Outputs = NetChuteAngulado(3);
 
+Vchute = Outputs(1,1);
+Wdribbler = Outputs(2,1);
+thetaRot = Outputs(3,1);
+ 
 X = kickerAngSolver(Vchute,Wdribbler,thetaGeneva,thetaRot,Xini,Xobjective);
 X1 = X(1,:);
 X2 = X(2,:);

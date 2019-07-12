@@ -16,22 +16,22 @@ function [net] = TreinaSNNChuteCurvo()
 
 %Número de casos testes de Vchute 
 
-Vchute0 = 2;
+Vchute0 = 1;
 VchuteF = 8;
-VchutePasso = 0.5;
+VchutePasso = 0.1;
 VchuteCasos = (VchuteF - Vchute0)/VchutePasso+1;
 
 %Número de casos testes de Wdribbler 
 
 Wdribbler0 = 0;
-WdribblerF = 10000;
-WdribblerPasso = 500;
+WdribblerF = 10000*2*pi/60;
+WdribblerPasso = 500*2*pi/60;
 WdribblerCasos = (WdribblerF - Wdribbler0)/WdribblerPasso+1;
 
 %Número de casos testes de thetaRot 
 
 thetaRot0 = 0;
-thetaRotF = 70*pi/180;
+thetaRotF = 85*pi/180;
 thetaRotPasso = 5*pi/180;
 thetaRotCasos = (thetaRotF - thetaRot0)/thetaRotPasso+1;
 
