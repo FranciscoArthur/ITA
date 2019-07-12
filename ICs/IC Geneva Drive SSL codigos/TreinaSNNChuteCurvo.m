@@ -93,7 +93,7 @@ net = feedforwardnet(10);
 net = configure(net,InputTrainSNN,TargetTrainSNN);
 
 % Treina a SNN
-ProcessamentoParalelo = gcp;
+gcp;
 
 net = train(net,InputTrainSNN,TargetTrainSNN,'useParallel','yes');
 
