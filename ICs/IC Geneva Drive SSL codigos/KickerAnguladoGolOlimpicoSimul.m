@@ -74,8 +74,8 @@ while 1
         plot([2.5 3.5],[0 0],'r--')%linha do gol
         
         %small que chuta
-        as = cos(linspace(pi-0.8671,2*pi+0.8671));
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
+        as = cos(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+3*pi/2);
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+3*pi/2);
         patch(0.085*as+Xini(1,1),0.085*bs+Xini(2,1)-0.055,'k')
         patch(0.05*a+Xini(1,1),0.05*b+Xini(2,1)-0.055,rgb('blue'));
         
@@ -140,7 +140,7 @@ while 1
         %plot(0,0)
         %hold on
         %videoFrame(i) = getframe(gcf);
-        pause(0.07)
+        pause(0.000000000007)
     end
 %     video = VideoWriter('SimulGolOlimpico','MPEG-4');
 %     video.FrameRate = 20;
