@@ -25,7 +25,7 @@ end
 %translação
 posTranslat =@(x) [x(1,1) - Xini(1,1);x(2,1) - Xini(2,1)]; 
 
-Xobj_transl = posTranslat(Xobj_rot);
+Xobj_transl = posTranslat(Xobjective);
 
 %rotação
 M =@(thet) [cos(thet) sin(thet); -sin(thet) cos(thet)];
@@ -51,7 +51,7 @@ X2 = X(2,:);
 %% desenhando o ambiente
 figure
 
-while 1
+%while 1
     for i = 1:length(X)%para ver o movimento da bola
         
         
@@ -74,8 +74,8 @@ while 1
         plot([2.5 3.5],[0 0],'r--')%linha do gol
         
         %small que chuta
-        as = cos(linspace(pi-0.8671,2*pi+0.8671));
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
+        as = cos(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+3*pi/2);
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+3*pi/2);
         patch(0.085*as+Xini(1,1),0.085*bs+Xini(2,1)-0.055,'k')
         patch(0.05*a+Xini(1,1),0.05*b+Xini(2,1)-0.055,rgb('blue'));
         
@@ -128,8 +128,9 @@ while 1
 %         patch(0.05*a+3.5,0.05*b+1,rgb('yellow'));
         
         % ponto que mirou
-        plot(Xobjective(1,1)*linspace(0.5,1.5),Xobjective(2,1)*linspace(0.5,1.5),'--r');
-       % plot(linspace(Xobjective(2,1)-1,Xobjective(2,1)+1),,'--r');
+        plot(Xobjective(1,1)*ones(1,100) + linspace(-0.25,0.25),Xobjective(2,1)*ones(1,100),'--r');
+        plot(Xobjective(1,1)*ones(1,100),Xobjective(2,1)*ones(1,100)+ linspace(-0.25,0.25),'--r');
+        plot(Xobjective(1,1),Xobjective(2,1),'ob')
         %% gerando animação
         %bal movimento+video
         
@@ -138,14 +139,14 @@ while 1
         hold off
         %plot(0,0)
         %hold on
-        %videoFrame(i) = getframe(gcf);
-        pause(0.07)
+        videoFrame(i) = getframe(gcf);
+        %pause(0.07)
     end
-%     video = VideoWriter('SimulGolOlimpico','MPEG-4');
-%     video.FrameRate = 20;
-%     open(video);
-%     writeVideo(video,videoFrame);
-%     close(video);
+    video = VideoWriter('SimulGolOlimpico','MPEG-4');
+    video.FrameRate = 20;
+    open(video);
+    writeVideo(video,videoFrame);
+    close(video);
 
 end
 
