@@ -74,66 +74,68 @@ while 1
         plot([2.5 3.5],[0 0],'r--')%linha do gol
         
         %small que chuta
-        as = cos(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+3*pi/2);
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+3*pi/2);
+        as = cos(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+2*pi/2);
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671)+thetaRot+2*pi/2);
         patch(0.085*as+Xini(1,1),0.085*bs+Xini(2,1)-0.055,'k')
         patch(0.05*a+Xini(1,1),0.05*b+Xini(2,1)-0.055,rgb('blue'));
         
-        %small goleiro lat
-        as = cos(linspace(pi-0.8671,2*pi+0.8671));
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-        patch(0.085*as+2.5,0.085*bs+0.1,'k')
-        patch(0.05*a+2.5,0.05*b+0.1,rgb('yellow'));
-        
-        %small barreira lat 1
-        as = cos(linspace(pi-0.8671,2*pi+0.8671));
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-        patch(0.085*as+2,0.085*bs+0.07,'k')
-        patch(0.05*a+2,0.05*b+0.07,rgb('yellow'));
-        
-        %small barreira lat 2
-        as = cos(linspace(pi-0.8671,2*pi+0.8671));
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-        patch(0.085*as+2,0.085*bs+0.24,'k')
-        patch(0.05*a+2,0.05*b+0.24,rgb('yellow'));
-        
-        %small barreira lat 3
-        as = cos(linspace(pi-0.8671,2*pi+0.8671));
-        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-        patch(0.085*as+2,0.085*bs+0.4,'k')
-        patch(0.05*a+2,0.05*b+0.4,rgb('yellow'));
-        
-%         %small goleiro front
+%         %small goleiro lat
 %         as = cos(linspace(pi-0.8671,2*pi+0.8671));
 %         bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-%         patch(0.085*as+3,0.085*bs+0.5,'k')
-%         patch(0.05*a+3,0.05*b+0.5,rgb('yellow'));      
+%         patch(0.085*as+2.5,0.085*bs+0.1,'k')
+%         patch(0.05*a+2.5,0.05*b+0.1,rgb('yellow'));
 %         
-%         %small barreira front 1
+%         %small barreira lat 1
 %         as = cos(linspace(pi-0.8671,2*pi+0.8671));
 %         bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-%         patch(0.085*as+3,0.085*bs+1,'k')
-%         patch(0.05*a+3,0.05*b+1,rgb('yellow'));
+%         patch(0.085*as+2,0.085*bs+0.07,'k')
+%         patch(0.05*a+2,0.05*b+0.07,rgb('yellow'));
 %         
-%         %small barreira front 2
+%         %small barreira lat 2
 %         as = cos(linspace(pi-0.8671,2*pi+0.8671));
 %         bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-%         patch(0.085*as+2.5,0.085*bs+1,'k')
-%         patch(0.05*a+2.5,0.05*b+1,rgb('yellow'));
+%         patch(0.085*as+2,0.085*bs+0.24,'k')
+%         patch(0.05*a+2,0.05*b+0.24,rgb('yellow'));
 %         
-%         %small barreira front 3
+%         %small barreira lat 3
 %         as = cos(linspace(pi-0.8671,2*pi+0.8671));
 %         bs = sin(linspace(pi-0.8671,2*pi+0.8671));
-%         patch(0.085*as+3.5,0.085*bs+1,'k')
-%         patch(0.05*a+3.5,0.05*b+1,rgb('yellow'));
+%         patch(0.085*as+2,0.085*bs+0.4,'k')
+%         patch(0.05*a+2,0.05*b+0.4,rgb('yellow'));
+        
+        %small goleiro front
+        as = cos(linspace(pi-0.8671,2*pi+0.8671));
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
+        patch(0.085*as+3,0.085*bs+0.5,'k')
+        patch(0.05*a+3,0.05*b+0.5,rgb('yellow'));      
+        
+        %small barreira front 1
+        as = cos(linspace(pi-0.8671,2*pi+0.8671));
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
+        patch(0.085*as+3,0.085*bs+1,'k')
+        patch(0.05*a+3,0.05*b+1,rgb('yellow'));
+        
+        %small barreira front 2
+        as = cos(linspace(pi-0.8671,2*pi+0.8671));
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
+        patch(0.085*as+2.5,0.085*bs+1,'k')
+        patch(0.05*a+2.5,0.05*b+1,rgb('yellow'));
+        
+        %small barreira front 3
+        as = cos(linspace(pi-0.8671,2*pi+0.8671));
+        bs = sin(linspace(pi-0.8671,2*pi+0.8671));
+        patch(0.085*as+3.5,0.085*bs+1,'k')
+        patch(0.05*a+3.5,0.05*b+1,rgb('yellow'));
         
         % ponto que mirou
         plot(Xobjective(1,1)*ones(1,100) + linspace(-0.25,0.25),Xobjective(2,1)*ones(1,100),'--r');
         plot(Xobjective(1,1)*ones(1,100),Xobjective(2,1)*ones(1,100)+ linspace(-0.25,0.25),'--r');
         plot(Xobjective(1,1),Xobjective(2,1),'ob')
+        plot(0.2*a+Xobjective(1,1),0.2*b+Xobjective(2,1),'--r');
         %% gerando animação
         %bal movimento+video
         
+        plot(X(1,:),X(2,:));
         
         trajetoria = patch(r*a+X(1,i),r*b+X(2,i),rgb('orange'));
         hold off
@@ -141,6 +143,7 @@ while 1
         %hold on
         %videoFrame(i) = getframe(gcf);
         pause(0.000000000007)
+        
     end
 %     video = VideoWriter('SimulGolOlimpico','MPEG-4');
 %     video.FrameRate = 20;
