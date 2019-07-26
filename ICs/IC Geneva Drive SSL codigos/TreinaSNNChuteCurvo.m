@@ -4,7 +4,7 @@ function [net] = TreinaSNNChuteCurvo()
 %                                                                                  %
 % Código para gerar matrix que treina a rede                                       %   
 % Gera uma matrix Nx4, com N o número de casos                                     %        
-% Colunas da matrix: caso i: Vchute, Wdribbler, thetaRot,  Xobjetivo            %
+% Colunas da matrix: caso i: Vchute, Wdribbler, thetaRot,  Xobjetivo               %
 % Em seguida treina a rede usando processamento em paralelo                        %
 %                                                                                  %
 % Autor: Arthur Azevedo                                                            %
@@ -40,7 +40,7 @@ thetaRotCasos = round((thetaRotF - thetaRot0)/thetaRotPasso)+1;
 % thetaGenevaCasos = 1; % Retirado do projeto
 
 %Por fim
-N = VchuteCasos*WdribblerCasos*thetaRotCasos;
+N = VchuteCasos*WdribblerCasos*thetaRotCasos
 
 %Preparando a matriz
 
