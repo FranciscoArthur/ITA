@@ -25,7 +25,7 @@ function example2
                                            % degree of freedom [u v w p q r]
     softPARAMS.isGRAV = 1; % include gravity?
     softPARAMS.g = 9.8; % gravity in m/s^2    
-    softPARAMS.isITER = 1; % iterative equilibrium determination?
+    softPARAMS.isITER = 0; % iterative equilibrium determination?
     softPARAMS.numITER = 10; % number of iterations for equilibrium determination
     softPARAMS.modAED = 3; % AERODYNAMIC MODEL: 
                                     %0-Steady;
@@ -64,9 +64,10 @@ function example2
     % plot structure without deformation:
     update(ap,strain_eq*0,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
     plotairplane3d(ap); 
-    % plot deformed structure (equilibrium condition):
-    update(ap,strain_eq,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
-    plotairplane3d(ap); 
+    tip_displacement = ap.members{1}(numele).node3.h(3)
+%     % plot deformed structure (equilibrium condition):
+%     update(ap,strain_eq,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
+%     plotairplane3d(ap); 
     view(30,45); axis equal; colormap winter;
 
     % flutter speed - undeformed (Linear)

@@ -24,7 +24,7 @@ function example4
     softPARAMS.g = 9.8; % gravity in m/s^2    
     softPARAMS.isITER = 0; % iterative equilibrium determination?
     softPARAMS.numITER = 10; % number of iterations for equilibrium determination
-    softPARAMS.modAED = 1; % AERODYNAMIC MODEL: 
+    softPARAMS.modAED = 3; % AERODYNAMIC MODEL: 
                                     %0-Steady;
                                     %1-Quasi-steady;
                                     %2-Quasi-steady with added mass;
@@ -60,44 +60,64 @@ function example4
     deltaflap = rb_eq(2);
     engine_position = rb_eq(3);
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%%%%%%%%%%%%%% NONLINEAR SIMULATION %%%%%%%%%%%%%%%%%
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Initial conditions
+        figure('color','w');
+    % plot structure without deformation:
+%     update(ap,strain_eq*0,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
+%     plotairplane3d(ap); 
+%     tip_displacement = ap.members{1}(numele).node3.h(3)
+    % plot deformed structure (equilibrium condition):
+    update(ap,strain_eq,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
+    plotairplane3d(ap); 
+    view(30,45); axis equal; colormap winter;
 
-    tSIM = input('Simulation time: (seconds)');    
-    T=[0.00 0.49 0.50 1.99 2.00 3.49 3.5 100];
-    elev=[0 0 1 1 -1 -1 0 0]/5;
-    aerodynamic_surface_pos = @(t) (deltaflap+interp1(T,elev,t));
-    beta0 = [0; V*cos(theta);-V*sin(theta);0;0;0]; % rigid body speeds
-    k0 = [theta;0;0;altitude];         % rigid body position/orientation
-    strain0 = strain_eq;
-    Vwind = 0;
-    % simulation:  
-    [tNL, strainNL, straindNL, lambdaNL, betaNL, kineticNL] = simulate(ap, [0 tSIM], strain0, beta0, k0, Vwind, @(t)engine_position, aerodynamic_surface_pos, 'implicit');
+    % flutter speed - undeformed (Linear)
+%     [flut_speed, flut_eig_val, flut_eig_vec] = flutter_speed(20,35,0.01,ap, strain_eq*0, altitude);
+%     flut_speed
+%     flut_eig_val
+%     
+%     % flutter speed - deformed (Nonlinear)
+    [flut_speed, flut_eig_val, flut_eig_vec] = flutter_speed(20,35,0.01,ap, strain_eq, altitude);
+    flut_speed
+    flut_eig_val
     
-    dt = 0.1;
-    [ts, Xs] = changedatarate(tNL,strainNL,dt);
-    [ts, kinetics] = changedatarate(tNL,kineticNL,dt);
-    tip_displacement = zeros(length(ts),1);
-    for i = 1:length(ts)
-        update(ap,Xs(i,:),zeros(size(Xs(i,:))),zeros(size(Xs(i,:))),zeros(sum(ap.membNAEDtotal),1));
-        tip_displacement(i) = ap.members{1}(numele).node3.h(3);
-    end
-    figure('color','w','name','Wing tip displacement');
-    plot(ts,tip_displacement);
-    xlabel('Time (s)'); ylabel('Tip displacement (m)');
-    grid on;
-        
-    longfig = figure('color','w');
-    subplot(2,2,1); plot(tNL,betaNL(:,2),'r'); xlabel('t'); ylabel('v (m/s)'); hold all;%velocidade eixo y
-    subplot(2,2,2); plot(tNL,betaNL(:,3),'r'); xlabel('t'); ylabel('w (m/s)'); hold all;%velocidade eixo z
-    subplot(2,2,3); plot(tNL,betaNL(:,4),'r'); xlabel('t'); ylabel('q (rad/s)');hold all;%q
-    subplot(2,2,4); plot(tNL,kineticNL(:,4),'r'); xlabel('t'); ylabel('Altitude (m)');hold all; %H
-    deltaalfa = 0; deltau = 0; deltav = 0; deltaw = 0;
-    dinamicarigida(V,altitude,longfig, tSIM, deltav, deltaw, deltaalfa,@(t)0, @(t)interp1(T,elev,t));
-    
-    airplanemovie(ap, ts', Xs,kinetics,dt,'test','gif'); colormap winter;
+%     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     %%%%%%%%%%%%%%% NONLINEAR SIMULATION %%%%%%%%%%%%%%%%%
+%     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     % Initial conditions
+% 
+%     tSIM = input('Simulation time: (seconds)');    
+%     T=[0.00 0.49 0.50 1.99 2.00 3.49 3.5 100];
+%     elev=[0 0 1 1 -1 -1 0 0]/5;
+%     aerodynamic_surface_pos = @(t) (deltaflap+interp1(T,elev,t));
+%     beta0 = [0; V*cos(theta);-V*sin(theta);0;0;0]; % rigid body speeds
+%     k0 = [theta;0;0;altitude];         % rigid body position/orientation
+%     strain0 = strain_eq;
+%     Vwind = 0;
+%     % simulation:  
+%     [tNL, strainNL, straindNL, lambdaNL, betaNL, kineticNL] = simulate(ap, [0 tSIM], strain0, beta0, k0, Vwind, @(t)engine_position, aerodynamic_surface_pos, 'implicit');
+%     
+%     dt = 0.1;
+%     [ts, Xs] = changedatarate(tNL,strainNL,dt);
+%     [ts, kinetics] = changedatarate(tNL,kineticNL,dt);
+%     tip_displacement = zeros(length(ts),1);
+%     for i = 1:length(ts)
+%         update(ap,Xs(i,:),zeros(size(Xs(i,:))),zeros(size(Xs(i,:))),zeros(sum(ap.membNAEDtotal),1));
+%         tip_displacement(i) = ap.members{1}(numele).node3.h(3);
+%     end
+%     figure('color','w','name','Wing tip displacement');
+%     plot(ts,tip_displacement);
+%     xlabel('Time (s)'); ylabel('Tip displacement (m)');
+%     grid on;
+%         
+%     longfig = figure('color','w');
+%     subplot(2,2,1); plot(tNL,betaNL(:,2),'r'); xlabel('t'); ylabel('v (m/s)'); hold all;%velocidade eixo y
+%     subplot(2,2,2); plot(tNL,betaNL(:,3),'r'); xlabel('t'); ylabel('w (m/s)'); hold all;%velocidade eixo z
+%     subplot(2,2,3); plot(tNL,betaNL(:,4),'r'); xlabel('t'); ylabel('q (rad/s)');hold all;%q
+%     subplot(2,2,4); plot(tNL,kineticNL(:,4),'r'); xlabel('t'); ylabel('Altitude (m)');hold all; %H
+%     deltaalfa = 0; deltau = 0; deltav = 0; deltaw = 0;
+%     dinamicarigida(V,altitude,longfig, tSIM, deltav, deltaw, deltaalfa,@(t)0, @(t)interp1(T,elev,t));
+%     
+%     airplanemovie(ap, ts', Xs,kinetics,dt,'test','gif'); colormap winter;
 end
 
 function ap = load_structure(numele, damp_ratio)

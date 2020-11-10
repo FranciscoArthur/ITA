@@ -26,7 +26,7 @@ function example5
     softPARAMS.g = 9.8; % gravity in m/s^2    
     softPARAMS.isITER = 1; % iterative equilibrium determination?
     softPARAMS.numITER = 10; % number of iterations for equilibrium determination
-    softPARAMS.modAED = 1; % AERODYNAMIC MODEL: 
+    softPARAMS.modAED = 3; % AERODYNAMIC MODEL: 
                                     %0-Steady;
                                     %1-Quasi-steady;
                                     %2-Quasi-steady with added mass;
@@ -61,6 +61,23 @@ function example5
     theta = rb_eq(1);
     deltaflap = rb_eq(2);
     engine_position = rb_eq(3);
+    
+    
+    % plot deformed structure (equilibrium condition):
+    update(ap,strain_eq,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
+    plotairplane3d(ap); 
+    view(30,45); axis equal; colormap winter;
+    tip_displacement = ap.members{1}(numele).node3.h(3)
+    
+    manete = rb_eq(3);    deltaflap = rb_eq(2);
+    thetaeq = rb_eq(1);    straineq = strain_eq;
+    betaeq = [0 V*cos(thetaeq) -V*sin(thetaeq) 0 0 0]';
+    keq = [thetaeq 0 0 altitude]';
+    
+    [flut_speed, flut_eig_val, flut_eig_vec] = flutter_speed(20,100,0.01,ap, strain_eq, altitude, betaeq,keq,manete,deltaflap);
+    flut_speed
+    flut_eig_val
+    
 
    %%%%%% LINEARIZATION OF EQUATIONS OF MOTION %%%%%%%%%%
     tic;

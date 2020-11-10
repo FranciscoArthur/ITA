@@ -27,7 +27,7 @@ function example1
     softPARAMS.g = 9.8; % gravity in m/s^2    
     softPARAMS.isITER = 1; % iterative equilibrium determination?
     softPARAMS.numITER = 10; % number of iterations for equilibrium determination
-    softPARAMS.modAED = 0; % AERODYNAMIC MODEL: 
+    softPARAMS.modAED = 3; % AERODYNAMIC MODEL: 
                                     %0-Steady;
                                     %1-Quasi-steady;
                                     %2-Quasi-steady with added mass;
@@ -84,6 +84,16 @@ function example1
     update(ap,strain_eq,zeros(size(strain_eq)),zeros(size(strain_eq)),zeros(sum(ap.membNAEDtotal),1));
     plotairplane3d(ap); 
     view(30,45); axis equal; colormap winter;
+    tip_displacement = ap.members{1}(numele).node3.h(3)
+    
+    manete = rb_eq(3);    deltaflap = rb_eq(2);
+    thetaeq = rb_eq(1);    straineq = strain_eq;
+    betaeq = [0 V*cos(thetaeq) -V*sin(thetaeq) 0 0 0]';
+    keq = [thetaeq 0 0 altitude]';
+    
+    [flut_speed, flut_eig_val, flut_eig_vec] = flutter_speed(20,100,0.01,ap, strain_eq, altitude, betaeq,keq,manete,deltaflap);
+    flut_speed
+    flut_eig_val
     
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -152,7 +162,20 @@ function flexible_member = create_flexible_member(num_elements,damp_ratio)
     CG = damp_ratio*diag([K11 K22 K33 K44]);
     
     % aerodynamic data
-    aeroparams = [];
+    c = 1; % chord
+    aeroparams.b = c/2; %semi-chord
+    aeroparams.N = 4; %number of lag states (Peter's Unsteady model)
+    aeroparams.a = 0.0; % position of aerodynamic center relative to elastic axis
+                        % relative to elastic axis (in terms of semi-chord)
+    aeroparams.alpha0 = 0*pi/180; % alpha_0 (in radians)
+    aeroparams.clalpha = 2*pi; % cl_alpha  lift coeff/rad
+    aeroparams.cm0 = 0;        % cm_0      moment coeff
+    aeroparams.cd0 = 0.02;     % cd_0
+    
+    % aerodynamic data for flap/aileron, if exists
+    aeroparams.ndelta = 0;   % Identification of the flap (1,2,3,...)
+    aeroparams.cldelta = 0;  % cl_delta
+    aeroparams.cmdelta = 0;  % cm_delta
     
     pos_cg = [0 0.0 0]; % position of section gravity center
                         % relative to elastic axis

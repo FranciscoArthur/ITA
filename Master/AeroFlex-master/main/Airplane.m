@@ -230,7 +230,7 @@ classdef Airplane < handle
 
             Alin = zeros((ap.NUMaedstates+size(straineq,2)*2+10));
             Mlin = eye((ap.NUMaedstates+size(straineq,2)*2+10));
-            for i = 1:size(xp,1)                
+            for i = 1:size(xp,1)  
                 soma = dinamicaflexODEimplicit(0, x + veclin(i, size(x,1))'*delta, xp, ap,Vwind,manete,deltaflap);
                 subtr = dinamicaflexODEimplicit(0, x - veclin(i, size(x,1))'*delta, xp, ap,Vwind,manete,deltaflap);
                 
@@ -253,6 +253,7 @@ classdef Airplane < handle
             lambda = zeros(sum(ap.membNAEDtotal),1);
             updateStrJac(ap);
             
+            
             beta = zeros(6,1);
             betap = zeros(6,1);
             if ~softPARAMS.isPINNED
@@ -267,10 +268,10 @@ classdef Airplane < handle
             if ~softPARAMS.isPINNED
                 options=optimset('MaxIter',20000,'TolFun',1e-15,'MaxFunEvals',20000,'TolX',1e-15);
                 vec= fsolve(@equilibracorpo,[0 0 0],options,strain, strainp, strainpp,lambda,beta,betap,kinetic,ap,V,0,0,'longitudinal');
-                theta = vec(1)
+                theta = vec(1);
                 kinetic(1) = theta;
-                deltaflap = vec(2)
-                tracao = vec(3)
+                deltaflap = vec(2);
+                tracao = vec(3);
                 beta(3) = -V*sin(theta);
                 beta(2) = V*cos(theta);
 
@@ -283,9 +284,9 @@ classdef Airplane < handle
                 end
                 if softPARAMS.isITER
                     for i = 1:softPARAMS.numITER
-                        theta
-                        deltaflap
-                        tracao
+                        theta;
+                        deltaflap;
+                        tracao;
                         if softPARAMS.updateStrJac == 1
                             updateStrJac(ap);
                         end
@@ -316,9 +317,9 @@ classdef Airplane < handle
                             figure(100);plotairplane3d(ap);
                 end
             end
-            theta
-            deltaflap
-            tracao
+            theta;
+            deltaflap;
+            tracao;
             
             
             %[Xp bp lambdap]= dinamicaflex(0,strainEQ, strainp, strainpp,lambda,beta,betap,kinetic,ap,Vento,Jhep,Jpep,Jthetaep,B,Jhb, Jpb, Jthetab,rho, tracao, deltaflap);
@@ -349,7 +350,7 @@ classdef Airplane < handle
             kinetic = [theta, phi, psi, H];
             if ~softPARAMS.isPINNED
                 options=optimset('MaxIter',20000,'TolFun',1e-15,'MaxFunEvals',20000,'TolX',1e-15);
-                vec= fsolve(@equilibracorpo,[theta deltaflap tracao phi aoa_trim],options,strain, strainp, strainpp,lambda,beta,betap,kinetic,ap,V,psid,beta_trim,'full')
+                vec= fsolve(@equilibracorpo,[theta deltaflap tracao phi aoa_trim],options,strain, strainp, strainpp,lambda,beta,betap,kinetic,ap,V,psid,beta_trim,'full');
             end
         end
         function [t strain strainp lambda beta kinetic] = simulate(ap, tspan, strain0, beta0, kinetic0, Vwind, manete, deltaflap, method)
@@ -359,6 +360,8 @@ classdef Airplane < handle
             options = odeset('OutputFcn',@odeprog,'Events',@odeabort,'MaxStep',0.10) ;
             switch lower(method)
                 case 'implicit'
+                    manete0 = manete(0);
+                    deltaflap0 = deltaflap(0);
                     [t X] = ode15i(@(t,x,xp)dinamicaflexODEimplicit(t,x,xp,ap, Vwind, manete(t), deltaflap(t)), tspan, x0, xp0,options);
                 case 'explicit'
                     [t X] = ode15s(@(t,x)dinamicaflexODE(t,x,ap, Vwind, manete(t), deltaflap(t)), tspan, x0,options);
@@ -399,7 +402,6 @@ switch flagLONG
         tracao = vec(5);
         phi = vec(6);
         aoa_trim = vec(7);
-        vec
         beta(1)= V*sin(beta_trim);
         beta(3) = -V*sin(aoa_trim)*cos(beta_trim);
         beta(2) = V*cos(aoa_trim)*cos(beta_trim);
@@ -410,7 +412,7 @@ switch flagLONG
         Vento = 0;
         FLAG = 0; % equilibrium dynamics
         [Xp bp lambdap kp]= dinamicaflex(0,strain, strainp, strainpp,lambda,beta,betap,kinetic,ap,Vento, tracao, deltaflap, FLAG);
-        zero = 10000*[bp' kp(4)]
+        zero = 10000*[bp' kp(4)];
 end
 end
 

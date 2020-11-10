@@ -136,7 +136,7 @@ classdef Element < handle
                     if i < j
                         %mantem-se zero
                     elseif i == j
-                        h0 = hdiag(el(i).h0);                        
+                        h0 = hdiag(el(i).h0);
                         Jhep1 = zeros(12,4);
                         Jhep2 = el(i).dexpGdEps*h0;
                         Jhep3 = el(i).dexp2GdEps*h0;
